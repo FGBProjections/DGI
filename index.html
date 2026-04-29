@@ -15,7 +15,7 @@
   body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;
     min-height:100vh;display:flex;flex-direction:row;align-items:flex-start;
     justify-content:center;padding:40px 20px;gap:20px;}
-
+ 
   /* ── Left ticker panel ───────────────────────────────────── */
   .ticker-panel{
     width:210px;flex-shrink:0;
@@ -41,7 +41,7 @@
   .ticker-feed::-webkit-scrollbar{width:4px;}
   .ticker-feed::-webkit-scrollbar-track{background:transparent;}
   .ticker-feed::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
-
+ 
   /* ── Game event cards ────────────────────────────────────── */
   .tick-item{
     padding:11px 14px;border-bottom:1px solid var(--border);
@@ -51,12 +51,12 @@
   .tick-item:last-child{border-bottom:none;}
   .tick-item.newest{background:rgba(59,130,246,.06);}
   .tick-item.live-game{background:rgba(251,191,36,.04);}
-
+ 
   @keyframes slideIn{
     from{opacity:0;transform:translateY(-6px)}
     to{opacity:1;transform:translateY(0)}
   }
-
+ 
   .tick-team{
     font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
     color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
@@ -71,7 +71,7 @@
   }
   .tick-status-badge.final{background:rgba(0,217,126,.12);color:var(--green);}
   .tick-status-badge.live{background:rgba(251,191,36,.15);color:#fbbf24;}
-
+ 
   .tick-score{
     font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);
   }
@@ -82,13 +82,13 @@
   .tick-projval.pos{color:var(--green);}
   .tick-projval.neg{color:var(--red);}
   .tick-projval.zero{color:var(--sub);}
-
+ 
   .ticker-empty{
     padding:24px 14px;text-align:center;
     font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);
     line-height:1.8;
   }
-
+ 
   /* ── Chart legend ────────────────────────────────────────── */
   .legend{display:flex;gap:16px;align-items:center;}
   .legend-item{display:flex;align-items:center;gap:6px;
@@ -100,10 +100,10 @@
     border-top:2px dashed #fbbf24;
     height:0;margin-top:1px;
   }
-
+ 
   /* ── Main dashboard column ───────────────────────────────── */
   .main-col{flex:1;min-width:0;max-width:900px;display:flex;flex-direction:column;}
-
+ 
   .topbar{display:flex;align-items:flex-start;justify-content:space-between;
     margin-bottom:24px;flex-wrap:wrap;gap:16px;}
   .ticker-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;
@@ -114,14 +114,14 @@
     letter-spacing:-.02em;line-height:1;}
   #val-change{font-family:'IBM Plex Mono',monospace;font-size:13px;margin-top:5px;font-weight:500;}
   .up{color:var(--green)}.down{color:var(--red)}.flat{color:var(--sub)}
-
+ 
   .stats-row{display:flex;gap:1px;background:var(--border);
     border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px;}
   .stat{flex:1;background:var(--surface);padding:12px 16px;display:flex;flex-direction:column;gap:3px;}
   .stat-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--sub);
     font-family:'IBM Plex Mono',monospace;}
   .stat-value{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500;color:var(--text);}
-
+ 
   .chart-wrapper{background:var(--surface);
     border:1px solid var(--border);border-radius:10px;overflow:hidden;}
   .chart-toolbar{display:flex;align-items:center;justify-content:space-between;
@@ -134,12 +134,12 @@
     animation:pulse 1.6s ease-in-out infinite;}
   @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
   #chart{width:100%;height:380px;}
-
+ 
   .footer{display:flex;justify-content:space-between;
     align-items:center;margin-top:14px;padding:0 2px;}
   #last-updated{font-size:11px;color:var(--sub);font-family:'IBM Plex Mono',monospace;}
   .source-label{font-size:11px;color:var(--muted);font-family:'IBM Plex Mono',monospace;}
-
+ 
   @media(max-width:760px){
     body{flex-direction:column;align-items:stretch;}
     .ticker-panel{width:100%;position:static;order:2;}
@@ -149,7 +149,7 @@
 </style>
 </head>
 <body>
-
+ 
 <!-- ═══ LEFT GAME TICKER ════════════════════════════════════ -->
 <aside class="ticker-panel">
   <div class="ticker-panel-header">
@@ -160,10 +160,10 @@
     <div class="ticker-empty">Waiting<br/>for data…</div>
   </div>
 </aside>
-
+ 
 <!-- ═══ MAIN DASHBOARD ══════════════════════════════════════ -->
 <div class="main-col">
-
+ 
   <div class="topbar">
     <div>
       <div class="ticker-label">Live Sum Tracker</div>
@@ -174,14 +174,14 @@
       <div id="val-change" class="flat">— / —</div>
     </div>
   </div>
-
+ 
   <div class="stats-row">
     <div class="stat"><span class="stat-label">Session Open</span><span class="stat-value" id="stat-open">—</span></div>
     <div class="stat"><span class="stat-label">High</span><span class="stat-value" id="stat-high">—</span></div>
     <div class="stat"><span class="stat-label">Low</span><span class="stat-value" id="stat-low">—</span></div>
     <div class="stat"><span class="stat-label">Finals</span><span class="stat-value" id="stat-finals">—</span></div>
   </div>
-
+ 
   <div class="chart-wrapper">
     <div class="chart-toolbar">
       <span class="chart-title">ProjValue Sum — 5 min intervals</span>
@@ -201,28 +201,28 @@
     </div>
     <div id="chart"></div>
   </div>
-
+ 
   <div class="footer">
     <span id="last-updated">Loading…</span>
     <span class="source-label">SRC: GOOGLE SHEETS / LOG</span>
   </div>
-
+ 
 </div>
-
+ 
 <script>
 // ═══════════════════════════════════════════════════════════
 //  YOUR APPS SCRIPT URL
 // ═══════════════════════════════════════════════════════════
 const scriptUrl = 'https://script.google.com/macros/s/AKfycbzMb5yE0GnyRqPutKHBobDFsU5W7f1AeIKYQAqTtGtOFyTZ-BesBYrQsjsg2tpnkwmG/exec';
 // ═══════════════════════════════════════════════════════════
-
+ 
 // ── Column indices from MLB Scores sheet ─────────────────────
 // Game Time(0) Team(1) H/A(2) Score(3) OppScore(4) Status(5)
 // Inning(6) W/L(7) MLBets%(8) MLMoney%(9) MLOdds(10)
 // Spread(11) RLBets%(12) RLMoney%(13) DegCom(14) ProjValue(15)
 const COL = { TIME:0, TEAM:1, HA:2, SCORE:3, OPP:4, STATUS:5,
-              INNING:6, WL:7, PROJVALUE:16 };
-
+              INNING:6, WL:7, PROJVALUE:15 };
+ 
 // ── Chart setup ─────────────────────────────────────────────
 const chartEl = document.getElementById('chart');
 const chart = LightweightCharts.createChart(chartEl, {
@@ -233,57 +233,57 @@ const chart = LightweightCharts.createChart(chartEl, {
   rightPriceScale: { borderColor:'#1e2128' },
   timeScale: { borderColor:'#1e2128', timeVisible:true, secondsVisible:false },
 });
-
+ 
 // Solid green = completed games sum
 const seriesCompleted = chart.addLineSeries({
   color:'#00d97e', lineWidth:2, priceLineVisible:false,
   lastValueVisible:true, crosshairMarkerVisible:true,
 });
-
+ 
 // Dashed yellow = live games on top of completed
 const seriesLive = chart.addLineSeries({
   color:'#fbbf24', lineWidth:1.5, lineStyle:1,
   priceLineVisible:false, lastValueVisible:true,
   crosshairMarkerVisible:true,
 });
-
+ 
 new ResizeObserver(() => chart.applyOptions({ width: chartEl.offsetWidth })).observe(chartEl);
-
+ 
 // ── Helpers ──────────────────────────────────────────────────
 const fmt = n => n == null ? '—' :
   Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-
+ 
 const fmtSigned = n => {
   if (n == null || isNaN(n)) return '—';
   return (n > 0 ? '+' : '') + fmt(n);
 };
-
+ 
 // ── Game ticker ──────────────────────────────────────────────
 function buildGameTicker(games) {
   const feed = document.getElementById('ticker-feed');
-
+ 
   // Only finalized games with a team name
   const finals = games.filter(g => {
     const team   = String(g[COL.TEAM] || '').trim();
     const status = String(g[COL.STATUS] || '').trim().toLowerCase();
     return team && (status === 'final' || status === 'game over');
   });
-
+ 
   // Count live games for the badge
   const liveCount = games.filter(g =>
     String(g[COL.STATUS] || '').trim().toLowerCase() !== 'final' &&
     String(g[COL.TEAM] || '').trim()
   ).length;
-
+ 
   document.getElementById('tick-count').textContent =
     `${finals.length}F / ${liveCount}L`;
   document.getElementById('stat-finals').textContent = finals.length;
-
+ 
   if (!finals.length) {
     feed.innerHTML = '<div class="ticker-empty">No final<br/>games yet</div>';
     return;
   }
-
+ 
   // Sort by scheduled game start time — latest at top
   finals.sort((a, b) => {
     const parseTime = t => {
@@ -295,7 +295,7 @@ function buildGameTicker(games) {
     };
     return parseTime(b[COL.TIME]) - parseTime(a[COL.TIME]);
   });
-
+ 
   feed.innerHTML = finals.map((g, i) => {
     const team     = String(g[COL.TEAM]).trim();
     const ha       = String(g[COL.HA] || '').trim();
@@ -303,21 +303,20 @@ function buildGameTicker(games) {
     const opp      = g[COL.OPP];
     const proj     = parseFloat(g[COL.PROJVALUE]);
     const gameTime = String(g[COL.TIME] || '').trim();
-
+ 
     const projClass = isNaN(proj) ? 'zero' : proj > 0 ? 'pos' : proj < 0 ? 'neg' : 'zero';
     const arrow     = isNaN(proj) ? '●' : proj > 0 ? '▲' : proj < 0 ? '▼' : '●';
     const projText  = isNaN(proj) ? '—' : fmtSigned(proj);
     const itemClass = i === 0 ? 'tick-item newest' : 'tick-item';
-
+ 
     const scoreStr = (score != null && opp != null && score !== '' && opp !== '')
       ? `${score}–${opp}` : '';
-
+ 
     return `
       <div class="${itemClass}">
         <div class="tick-team">${team}</div>
         <div class="tick-meta">
           <span class="tick-status-badge final">FINAL</span>
-          ${gameTime ? `<span>${gameTime}</span>` : ''}
           ${ha ? `<span>${ha}</span>` : ''}
         </div>
         ${scoreStr ? `<div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--sub);">Score: ${scoreStr}</div>` : ''}
@@ -325,24 +324,24 @@ function buildGameTicker(games) {
       </div>`;
   }).join('');
 }
-
+ 
 // ── Dual chart lines ─────────────────────────────────────────
 // Completed (solid) = flat stretches in the log (value unchanged)
 // Live (dashed)     = points where value is in flux between snapshots
 function updateChart(logData) {
   if (!logData.length) return;
-
+ 
   const completedPts = [];
   const livePts      = [];
-
+ 
   for (let i = 0; i < logData.length; i++) {
     const d    = logData[i];
     const prev = logData[i - 1];
     const next = logData[i + 1];
-
+ 
     const changedFromPrev = prev && Math.abs(d.value - prev.value) > 0.001;
     const stableToNext    = !next || Math.abs(d.value - next.value) < 0.001;
-
+ 
     if (!changedFromPrev && stableToNext) {
       // Flat — completed games driving this value
       completedPts.push({ time: d.time, value: d.value });
@@ -355,20 +354,20 @@ function updateChart(logData) {
       }
     }
   }
-
+ 
   // Fallback if everything flat (e.g. before games start)
   if (completedPts.length === 0) {
     completedPts.push(...logData.map(d => ({ time: d.time, value: d.value })));
   }
-
+ 
   seriesCompleted.setData(completedPts.sort((a,b) => a.time - b.time));
   seriesLive.setData(livePts.sort((a,b) => a.time - b.time));
 }
-
+ 
 // ── Main UI ──────────────────────────────────────────────────
 function updateUI(logData, games) {
   if (!logData.length) return;
-
+ 
   const vals = logData.map(d => d.value);
   const last = vals.at(-1), open = vals[0];
   const high = Math.max(...vals), low = Math.min(...vals);
@@ -376,7 +375,7 @@ function updateUI(logData, games) {
   const pct  = ((chg / Math.abs(open || 1)) * 100).toFixed(2);
   const dir  = chg > 0 ? 'up' : chg < 0 ? 'down' : 'flat';
   const sign = chg >= 0 ? '+' : '';
-
+ 
   document.getElementById('current-val').textContent = fmt(last);
   document.getElementById('current-val').className   = dir;
   document.getElementById('val-change').textContent  = `${sign}${fmt(chg)}  (${sign}${pct}%)`;
@@ -386,10 +385,10 @@ function updateUI(logData, games) {
   document.getElementById('stat-low').textContent    = fmt(low);
   document.getElementById('last-updated').textContent =
     'Last updated: ' + new Date().toLocaleTimeString();
-
+ 
   if (games && games.length) buildGameTicker(games);
 }
-
+ 
 // ── Fetch helpers ────────────────────────────────────────────
 async function fetchLog() {
   const rows = await (await fetch(scriptUrl)).json();
@@ -406,13 +405,13 @@ async function fetchLog() {
   }
   return data.sort((a, b) => a.time - b.time);
 }
-
+ 
 async function fetchGames() {
   const rows = await (await fetch(scriptUrl + '?sheet=games')).json();
   if (!Array.isArray(rows) || rows.length < 2) return [];
   return rows.slice(1); // skip header
 }
-
+ 
 // ── Refresh loop ─────────────────────────────────────────────
 async function refresh() {
   try {
@@ -424,9 +423,10 @@ async function refresh() {
     console.error(e);
   }
 }
-
+ 
 refresh();
 setInterval(refresh, 5 * 60 * 1000);
 </script>
 </body>
 </html>
+ 
