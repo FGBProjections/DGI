@@ -274,8 +274,11 @@ function switchTab(tab) {
   document.querySelector(`.tab-btn[onclick="switchTab('${tab}')"]`).classList.add('active');
   document.getElementById('tab-' + tab).classList.add('active');
   if (tab === 'daily') {
-    refreshDaily();
-    setTimeout(() => dailyChart.applyOptions({ width: dailyChartEl.offsetWidth }), 50);
+    setTimeout(() => {
+      dailyChart.applyOptions({ width: dailyChartEl.offsetWidth });
+      refreshDaily();
+    }, 100);
+  }
   } else {
     setTimeout(() => chart.applyOptions({ width: chartEl.offsetWidth }), 50);
   }
@@ -312,7 +315,10 @@ const dailySeries = dailyChart.addLineSeries({ color:'#3b82f6', lineWidth:2,
   crosshairMarkerRadius:5 });
 const dailyZeroSeries = dailyChart.addLineSeries({ color:'#3a3f4a', lineWidth:1,
   lineStyle:2, priceLineVisible:false, lastValueVisible:false, crosshairMarkerVisible:false });
-new ResizeObserver(() => dailyChart.applyOptions({ width: dailyChartEl.offsetWidth })).observe(dailyChartEl);
+new ResizeObserver(() => {
+  const w = dailyChartEl.offsetWidth;
+  if (w > 0) dailyChart.applyOptions({ width: w });
+}).observe(dailyChartEl);
 
 // ── Helpers ──────────────────────────────────────────────────
 const fmt = n => n == null ? '—' :
