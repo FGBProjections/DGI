@@ -291,16 +291,14 @@ function switchTab(tab) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelector(`.tab-btn[onclick="switchTab('${tab}')"]`).classList.add('active');
   document.getElementById('page-' + tab).classList.add('active');
-  if (tab === 'daily') {
-    // Give browser time to paint the tab before resizing
+ if (tab === 'daily') {
     setTimeout(() => {
       const w = dailyChartEl.offsetWidth;
-      if (w > 0) {
-        dailyChart.applyOptions({ width: w });
+      dailyChart.applyOptions({ width: w || 691, height: 380 });
+      refreshDaily().then(() => {
         dailyChart.timeScale().fitContent();
-      }
-      refreshDaily();
-    }, 100);
+      });
+    }, 250);
   }
 }
 
