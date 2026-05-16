@@ -276,6 +276,9 @@ const dailyChart = LightweightCharts.createChart(dailyChartEl, {
 const dailySeries = dailyChart.addLineSeries({ color:'#3b82f6', lineWidth:2,
   priceLineVisible:false, lastValueVisible:true, crosshairMarkerVisible:true,
   crosshairMarkerRadius:5 });
+const dailyCumSeries = dailyChart.addLineSeries({ color:'#00d97e', lineWidth:2,
+  lineStyle:1, priceLineVisible:false, lastValueVisible:true, crosshairMarkerVisible:true,
+  crosshairMarkerRadius:5 });
 const dailyZeroSeries = dailyChart.addLineSeries({ color:'#3a3f4a', lineWidth:1,
   lineStyle:2, priceLineVisible:false, lastValueVisible:false, crosshairMarkerVisible:false });
 new ResizeObserver(() => {
@@ -361,6 +364,10 @@ function buildDailyChart(rows) {
   const w = dailyChartEl.offsetWidth;
   if (w > 0) dailyChart.applyOptions({ width: w, height: 380 });
   dailySeries.setData(pts);
+  const cumPts = rows.filter(r=>r.time&&!isNaN(r.time))
+    .map(r=>({ time:r.time, value:r.cumulative }))
+    .sort((a,b)=>a.time-b.time);
+  dailyCumSeries.setData(cumPts);
   dailyZeroSeries.setData(pts.map(p=>({ time:p.time, value:0 })));
   dailyChart.timeScale().fitContent();
 
