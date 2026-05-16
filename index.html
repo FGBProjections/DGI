@@ -430,12 +430,15 @@ async function fetchDaily() {
     const raw=String(rows[i][0]||'').trim(), val=parseFloat(rows[i][1]);
     if (!raw||isNaN(val)) continue;
     let dt;
-    if (raw.includes('T'))      { dt=new Date(raw); }
-    else if (raw.includes('/')) {
-      const p=raw.split('/');
-      if (p.length<3) continue;
-      dt=new Date(`${p[2]}-${String(p[0]).padStart(2,'0')}-${String(p[1]).padStart(2,'0')}T12:00:00`);
-    } else continue;
+    if (raw.includes('T')) {
+      dt = new Date(raw);
+    } else if (raw.includes('/')) {
+      const p = raw.split('/');
+      if (p.length < 3) continue;
+      dt = new Date(p[2]+'-'+String(p[0]).padStart(2,'0')+'-'+String(p[1]).padStart(2,'0')+'T12:00:00');
+    } else {
+      continue;
+    }
     if (isNaN(dt.getTime())) continue;
     const dateStr=`${dt.getMonth()+1}/${dt.getDate()}/${dt.getFullYear()}`;
     cumulative=parseFloat((cumulative+val).toFixed(2));
@@ -506,5 +509,7 @@ refresh();
 setInterval(refresh, 5*60*1000);
 setInterval(refreshDaily, 60*60*1000);
 </script>
+</body>
+</html>
 </body>
 </html>
