@@ -15,41 +15,31 @@
   body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;
     min-height:100vh;padding:40px 20px;}
 
-  /* ── Tab navigation ─────────────────────────────────────── */
-  .tab-nav{
-    display:flex;gap:2px;margin-bottom:24px;
-    background:var(--surface);border:1px solid var(--border);
-    border-radius:8px;padding:4px;width:fit-content;
-  }
-  .tab-btn{
-    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;
-    text-transform:uppercase;padding:8px 20px;border-radius:5px;
-    border:none;cursor:pointer;transition:all .2s;
-    background:transparent;color:var(--sub);
-  }
+  .tab-nav{display:flex;gap:2px;margin-bottom:24px;background:var(--surface);
+    border:1px solid var(--border);border-radius:8px;padding:4px;width:fit-content;}
+  .tab-btn{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;padding:8px 20px;border-radius:5px;border:none;
+    cursor:pointer;transition:all .2s;background:transparent;color:var(--sub);}
   .tab-btn.active{background:var(--border);color:var(--text);font-weight:600;}
   .tab-btn:hover:not(.active){color:var(--text);}
-  .tab-panel{display:none;}
-  .tab-panel.active{display:flex;flex-direction:row;align-items:flex-start;gap:20px;}
-  .tab-panel.daily-panel.active{display:block;}
 
-  /* ── Ticker panel ────────────────────────────────────────── */
-  .ticker-panel{
-    width:210px;flex-shrink:0;
-    background:var(--surface);border:1px solid var(--border);border-radius:10px;
-    overflow:hidden;position:sticky;top:40px;display:flex;flex-direction:column;
-  }
+  .page{display:none;flex-direction:row;align-items:flex-start;gap:20px;}
+  .page.active{display:flex;}
+  .page.daily-page.active{display:block;}
+
+  .ticker-panel{width:210px;flex-shrink:0;background:var(--surface);
+    border:1px solid var(--border);border-radius:10px;overflow:hidden;
+    position:sticky;top:40px;display:flex;flex-direction:column;}
   .ticker-panel-header{padding:12px 14px;border-bottom:1px solid var(--border);
     display:flex;align-items:center;justify-content:space-between;}
   .ticker-panel-title{font-family:'IBM Plex Mono',monospace;font-size:10px;
     letter-spacing:.12em;text-transform:uppercase;color:var(--sub);}
   .ticker-count{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);}
-  .ticker-feed{overflow-y:auto;max-height:580px;
-    scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+  .ticker-feed{overflow-y:auto;max-height:580px;scrollbar-width:thin;
+    scrollbar-color:var(--border) transparent;}
   .ticker-feed::-webkit-scrollbar{width:4px;}
   .ticker-feed::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 
-  /* ── Cards ───────────────────────────────────────────────── */
   .tick-item{padding:11px 14px;border-bottom:1px solid var(--border);
     display:flex;flex-direction:column;gap:4px;animation:slideIn .3s ease;}
   .tick-item:last-child{border-bottom:none;}
@@ -67,40 +57,36 @@
   .tick-projval.pos{color:var(--green);}
   .tick-projval.neg{color:var(--red);}
   .tick-projval.zero{color:var(--sub);}
-  .ticker-empty{padding:24px 14px;text-align:center;
-    font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);line-height:1.8;}
+  .ticker-empty{padding:24px 14px;text-align:center;font-family:'IBM Plex Mono',monospace;
+    font-size:10px;color:var(--muted);line-height:1.8;}
 
-  /* ── Legend ──────────────────────────────────────────────── */
   .legend{display:flex;gap:16px;align-items:center;}
-  .legend-item{display:flex;align-items:center;gap:6px;
-    font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);}
+  .legend-item{display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;
+    font-size:10px;color:var(--sub);}
   .legend-line{width:20px;height:2px;border-radius:1px;}
   .legend-line.solid{background:var(--green);}
   .legend-line.dotted{background:none;border-top:2px dashed #fbbf24;height:0;margin-top:1px;}
 
-  /* ── Main col ────────────────────────────────────────────── */
   .main-col{flex:1;min-width:0;max-width:900px;display:flex;flex-direction:column;}
   .topbar{display:flex;align-items:flex-start;justify-content:space-between;
     margin-bottom:24px;flex-wrap:wrap;gap:16px;}
   .ticker-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;
     text-transform:uppercase;color:var(--sub);margin-bottom:4px;}
-  #ticker-name,#daily-ticker-name{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;}
+  .big-title{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;}
   .price-block{text-align:right;}
-  #current-val,#daily-current-val{font-family:'IBM Plex Mono',monospace;font-size:38px;
-    font-weight:600;letter-spacing:-.02em;line-height:1;}
-  #val-change,#daily-val-change{font-family:'IBM Plex Mono',monospace;font-size:13px;
-    margin-top:5px;font-weight:500;}
+  .big-val{font-family:'IBM Plex Mono',monospace;font-size:38px;font-weight:600;
+    letter-spacing:-.02em;line-height:1;}
+  .big-chg{font-family:'IBM Plex Mono',monospace;font-size:13px;margin-top:5px;font-weight:500;}
   .up{color:var(--green)}.down{color:var(--red)}.flat{color:var(--sub)}
 
-  .stats-row{display:flex;gap:1px;background:var(--border);
-    border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px;}
+  .stats-row{display:flex;gap:1px;background:var(--border);border:1px solid var(--border);
+    border-radius:8px;overflow:hidden;margin-bottom:16px;}
   .stat{flex:1;background:var(--surface);padding:12px 16px;display:flex;flex-direction:column;gap:3px;}
   .stat-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--sub);
     font-family:'IBM Plex Mono',monospace;}
   .stat-value{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500;color:var(--text);}
 
-  .chart-wrapper{background:var(--surface);border:1px solid var(--border);
-    border-radius:10px;overflow:hidden;}
+  .chart-wrapper{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
   .chart-toolbar{display:flex;align-items:center;justify-content:space-between;
     padding:14px 20px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:10px;}
   .chart-title{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;
@@ -110,20 +96,16 @@
   .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);
     animation:pulse 1.6s ease-in-out infinite;}
   @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
-  #chart,#daily-chart{width:100%;height:380px;}
+  #chart-container{width:100%;height:380px;}
 
   .footer{display:flex;justify-content:space-between;align-items:center;
     margin-top:14px;padding:0 2px;}
-  #last-updated{font-size:11px;color:var(--sub);font-family:'IBM Plex Mono',monospace;}
+  .last-updated{font-size:11px;color:var(--sub);font-family:'IBM Plex Mono',monospace;}
   .source-label{font-size:11px;color:var(--muted);font-family:'IBM Plex Mono',monospace;}
 
-  /* ── Daily tab ───────────────────────────────────────────── */
   .daily-layout{display:flex;gap:20px;align-items:flex-start;}
   .daily-main{flex:1;min-width:0;max-width:900px;display:flex;flex-direction:column;}
-  .daily-topbar{display:flex;align-items:flex-start;justify-content:space-between;
-    margin-bottom:24px;flex-wrap:wrap;gap:16px;}
 
-  /* ── History table ───────────────────────────────────────── */
   .history-table-wrap{margin-top:20px;background:var(--surface);
     border:1px solid var(--border);border-radius:10px;overflow:hidden;}
   .history-table-header{padding:14px 20px;border-bottom:1px solid var(--border);
@@ -144,7 +126,7 @@
   .td-chg-neg{color:var(--red);}
 
   @media(max-width:760px){
-    .tab-panel.active,.daily-layout{flex-direction:column;align-items:stretch;}
+    .page.active,.daily-layout{flex-direction:column;align-items:stretch;}
     .ticker-panel{width:100%;position:static;}
     .ticker-feed{max-height:240px;}
     .main-col,.daily-main{max-width:100%;}
@@ -153,14 +135,13 @@
 </head>
 <body>
 
-<!-- ═══ TABS ════════════════════════════════════════════════ -->
 <div class="tab-nav">
   <button class="tab-btn active" onclick="switchTab('live')">Live</button>
   <button class="tab-btn" onclick="switchTab('daily')">Daily History</button>
 </div>
 
-<!-- ═══ LIVE TAB ════════════════════════════════════════════ -->
-<div class="tab-panel active" id="tab-live">
+<!-- ═══ LIVE PAGE ════════════════════════════════════════════ -->
+<div class="page active" id="page-live">
   <aside class="ticker-panel">
     <div class="ticker-panel-header">
       <span class="ticker-panel-title">Game Results</span>
@@ -170,46 +151,45 @@
       <div class="ticker-empty">Waiting<br/>for data…</div>
     </div>
   </aside>
-
   <div class="main-col">
     <div class="topbar">
       <div>
         <div class="ticker-label">Live Sum Tracker</div>
-        <div id="ticker-name">PROJVALUE SUM</div>
+        <div class="big-title">PROJVALUE SUM</div>
       </div>
       <div class="price-block">
-        <div id="current-val" class="flat">—</div>
-        <div id="val-change" class="flat">— / —</div>
+        <div id="live-val" class="big-val flat">—</div>
+        <div id="live-chg" class="big-chg flat">— / —</div>
       </div>
     </div>
     <div class="stats-row">
-      <div class="stat"><span class="stat-label">Session Open</span><span class="stat-value" id="stat-open">—</span></div>
-      <div class="stat"><span class="stat-label">High</span><span class="stat-value" id="stat-high">—</span></div>
-      <div class="stat"><span class="stat-label">Low</span><span class="stat-value" id="stat-low">—</span></div>
-      <div class="stat"><span class="stat-label">Finals</span><span class="stat-value" id="stat-finals">—</span></div>
+      <div class="stat"><span class="stat-label">Session Open</span><span class="stat-value" id="live-open">—</span></div>
+      <div class="stat"><span class="stat-label">High</span><span class="stat-value" id="live-high">—</span></div>
+      <div class="stat"><span class="stat-label">Low</span><span class="stat-value" id="live-low">—</span></div>
+      <div class="stat"><span class="stat-label">Finals</span><span class="stat-value" id="live-finals">—</span></div>
     </div>
     <div class="chart-wrapper">
       <div class="chart-toolbar">
-        <span class="chart-title">ProjValue Sum — 5 min intervals</span>
+        <span class="chart-title" id="chart-label">ProjValue Sum — 5 min intervals</span>
         <div style="display:flex;align-items:center;gap:16px;">
-          <div class="legend">
+          <div class="legend" id="live-legend">
             <div class="legend-item"><div class="legend-line solid"></div><span>Completed</span></div>
             <div class="legend-item"><div class="legend-line dotted"></div><span>Live</span></div>
           </div>
           <span class="live-badge"><span class="live-dot"></span> LIVE</span>
         </div>
       </div>
-      <div id="chart"></div>
+      <div id="chart-container"></div>
     </div>
     <div class="footer">
-      <span id="last-updated">Loading…</span>
+      <span id="live-updated" class="last-updated">Loading…</span>
       <span class="source-label">SRC: GOOGLE SHEETS / LOG</span>
     </div>
   </div>
 </div>
 
-<!-- ═══ DAILY HISTORY TAB ═══════════════════════════════════ -->
-<div class="tab-panel daily-panel" id="tab-daily">
+<!-- ═══ DAILY PAGE ═══════════════════════════════════════════ -->
+<div class="page daily-page" id="page-daily">
   <div class="daily-layout">
     <aside class="ticker-panel">
       <div class="ticker-panel-header">
@@ -220,40 +200,34 @@
         <div class="ticker-empty">Loading…</div>
       </div>
     </aside>
-
     <div class="daily-main">
-      <div class="daily-topbar">
+      <div class="topbar">
         <div>
           <div class="ticker-label">Daily History</div>
-          <div id="daily-ticker-name">PROJVALUE / DAY</div>
+          <div class="big-title">PROJVALUE / DAY</div>
         </div>
         <div class="price-block">
-          <div id="daily-current-val" class="flat">—</div>
-          <div id="daily-val-change" class="flat">— / —</div>
+          <div id="daily-val" class="big-val flat">—</div>
+          <div id="daily-chg" class="big-chg flat">— / —</div>
         </div>
       </div>
-
       <div class="stats-row">
-        <div class="stat"><span class="stat-label">Cumulative</span><span class="stat-value" id="daily-stat-cum">—</span></div>
-        <div class="stat"><span class="stat-label">Best Day</span><span class="stat-value" id="daily-stat-best">—</span></div>
-        <div class="stat"><span class="stat-label">Worst Day</span><span class="stat-value" id="daily-stat-worst">—</span></div>
-        <div class="stat"><span class="stat-label">Win Days</span><span class="stat-value" id="daily-stat-wins">—</span></div>
+        <div class="stat"><span class="stat-label">Cumulative</span><span class="stat-value" id="daily-cum">—</span></div>
+        <div class="stat"><span class="stat-label">Best Day</span><span class="stat-value" id="daily-best">—</span></div>
+        <div class="stat"><span class="stat-label">Worst Day</span><span class="stat-value" id="daily-worst">—</span></div>
+        <div class="stat"><span class="stat-label">Win Days</span><span class="stat-value" id="daily-wins">—</span></div>
       </div>
-
       <div class="chart-wrapper">
         <div class="chart-toolbar">
           <span class="chart-title">ProjValue — Day by Day</span>
-          <span id="daily-last-updated" style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sub);">Loading…</span>
+          <span id="daily-updated" class="last-updated">Loading…</span>
         </div>
-        <div id="daily-chart"></div>
+        <div id="daily-chart-container" style="width:100%;height:380px;"></div>
       </div>
-
       <div class="history-table-wrap">
         <div class="history-table-header">Full History</div>
         <table>
-          <thead>
-            <tr><th>Date</th><th>ProjValue</th><th>Day Change</th><th>Cumulative</th></tr>
-          </thead>
+          <thead><tr><th>Date</th><th>ProjValue</th><th>Day Change</th><th>Cumulative</th></tr></thead>
           <tbody id="daily-table-body">
             <tr><td colspan="4" style="color:var(--sub);text-align:center;">Loading…</td></tr>
           </tbody>
@@ -267,26 +241,17 @@
 const scriptUrl = 'https://script.google.com/macros/s/AKfycbzMb5yE0GnyRqPutKHBobDFsU5W7f1AeIKYQAqTtGtOFyTZ-BesBYrQsjsg2tpnkwmG/exec';
 const COL = { TIME:0, TEAM:1, HA:2, SCORE:3, OPP:4, STATUS:5, INNING:6, WL:7, PROJVALUE:15 };
 
-// ── Tab switching ────────────────────────────────────────────
-function switchTab(tab) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelector(`.tab-btn[onclick="switchTab('${tab}')"]`).classList.add('active');
-  document.getElementById('tab-' + tab).classList.add('active');
-  if (tab === 'daily') {
-    setTimeout(() => {
-      dailyChart.applyOptions({ width: dailyChartEl.offsetWidth });
-      refreshDaily();
-    }, 100);
-  }
-  } else {
-    setTimeout(() => chart.applyOptions({ width: chartEl.offsetWidth }), 50);
-  }
-}
+// ── Helpers ──────────────────────────────────────────────────
+const fmt = n => n == null ? '—' :
+  Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmtSigned = n => (n == null || isNaN(n)) ? '—' : (n > 0 ? '+' : '') + fmt(n);
+const colorClass = n => n > 0 ? 'up' : n < 0 ? 'down' : 'flat';
 
-// ── Live chart ───────────────────────────────────────────────
-const chartEl = document.getElementById('chart');
-const chart = LightweightCharts.createChart(chartEl, {
+// ── Single chart instance ────────────────────────────────────
+const liveChartEl  = document.getElementById('chart-container');
+const dailyChartEl = document.getElementById('daily-chart-container');
+
+const liveChart = LightweightCharts.createChart(liveChartEl, {
   layout:{ background:{color:'#111318'}, textColor:'#6b7280' },
   grid:{ vertLines:{color:'#1e2128'}, horzLines:{color:'#1e2128'} },
   crosshair:{ vertLine:{color:'#3a3f4a',labelBackgroundColor:'#1e2128'},
@@ -294,14 +259,12 @@ const chart = LightweightCharts.createChart(chartEl, {
   rightPriceScale:{ borderColor:'#1e2128' },
   timeScale:{ borderColor:'#1e2128', timeVisible:true, secondsVisible:false },
 });
-const seriesCompleted = chart.addLineSeries({ color:'#00d97e', lineWidth:2,
+const seriesCompleted = liveChart.addLineSeries({ color:'#00d97e', lineWidth:2,
   priceLineVisible:false, lastValueVisible:true, crosshairMarkerVisible:true });
-const seriesLive = chart.addLineSeries({ color:'#fbbf24', lineWidth:1.5, lineStyle:1,
+const seriesLive = liveChart.addLineSeries({ color:'#fbbf24', lineWidth:1.5, lineStyle:1,
   priceLineVisible:false, lastValueVisible:true, crosshairMarkerVisible:true });
-new ResizeObserver(() => chart.applyOptions({ width: chartEl.offsetWidth })).observe(chartEl);
+new ResizeObserver(() => liveChart.applyOptions({ width: liveChartEl.offsetWidth })).observe(liveChartEl);
 
-// ── Daily chart ──────────────────────────────────────────────
-const dailyChartEl = document.getElementById('daily-chart');
 const dailyChart = LightweightCharts.createChart(dailyChartEl, {
   layout:{ background:{color:'#111318'}, textColor:'#6b7280' },
   grid:{ vertLines:{color:'#1e2128'}, horzLines:{color:'#1e2128'} },
@@ -320,31 +283,44 @@ new ResizeObserver(() => {
   if (w > 0) dailyChart.applyOptions({ width: w });
 }).observe(dailyChartEl);
 
-// ── Helpers ──────────────────────────────────────────────────
-const fmt = n => n == null ? '—' :
-  Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-const fmtSigned = n => {
-  if (n == null || isNaN(n)) return '—';
-  return (n > 0 ? '+' : '') + fmt(n);
-};
+// ── Tab switching ────────────────────────────────────────────
+let currentTab = 'live';
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.tab-btn[onclick="switchTab('${tab}')"]`).classList.add('active');
+  document.getElementById('page-' + tab).classList.add('active');
+  if (tab === 'daily') {
+    // Give browser time to paint the tab before resizing
+    setTimeout(() => {
+      const w = dailyChartEl.offsetWidth;
+      if (w > 0) {
+        dailyChart.applyOptions({ width: w });
+        dailyChart.timeScale().fitContent();
+      }
+      refreshDaily();
+    }, 100);
+  }
+}
 
 // ── Live ticker ──────────────────────────────────────────────
 function buildGameTicker(games) {
   const feed = document.getElementById('ticker-feed');
   const finals = games.filter(g => {
-    const team   = String(g[COL.TEAM] || '').trim();
-    const status = String(g[COL.STATUS] || '').trim().toLowerCase();
-    return team && (status === 'final' || status === 'game over');
+    const team   = String(g[COL.TEAM]||'').trim();
+    const status = String(g[COL.STATUS]||'').trim().toLowerCase();
+    return team && (status==='final'||status==='game over');
   });
   const liveCount = games.filter(g =>
-    String(g[COL.STATUS]||'').trim().toLowerCase() !== 'final' &&
+    String(g[COL.STATUS]||'').trim().toLowerCase()!=='final' &&
     String(g[COL.TEAM]||'').trim()).length;
   document.getElementById('tick-count').textContent = `${finals.length}F / ${liveCount}L`;
-  document.getElementById('stat-finals').textContent = finals.length;
+  document.getElementById('live-finals').textContent = finals.length;
   if (!finals.length) { feed.innerHTML='<div class="ticker-empty">No final<br/>games yet</div>'; return; }
   finals.sort((a,b) => {
     const pt = t => { const d=new Date('1970/01/01 '+String(t||'').trim()); return isNaN(d.getTime())?0:d.getTime(); };
-    return pt(b[COL.TIME]) - pt(a[COL.TIME]);
+    return pt(b[COL.TIME])-pt(a[COL.TIME]);
   });
   feed.innerHTML = finals.map((g,i) => {
     const team=String(g[COL.TEAM]).trim(), ha=String(g[COL.HA]||'').trim();
@@ -364,7 +340,7 @@ function buildGameTicker(games) {
 // ── Daily sidebar ────────────────────────────────────────────
 function buildDailySidebar(rows) {
   const feed = document.getElementById('daily-ticker-feed');
-  document.getElementById('daily-day-count').textContent = rows.length + 'd';
+  document.getElementById('daily-day-count').textContent = rows.length+'d';
   if (!rows.length) { feed.innerHTML='<div class="ticker-empty">No history<br/>yet</div>'; return; }
   feed.innerHTML = [...rows].reverse().map((r,i) => {
     const pc=r.value>0?'pos':r.value<0?'neg':'zero';
@@ -380,45 +356,37 @@ function buildDailySidebar(rows) {
 // ── Daily chart + stats ──────────────────────────────────────
 function buildDailyChart(rows) {
   if (!rows.length) return;
-
-  // Use pre-computed time field — no re-parsing needed
-  const pts = rows
-    .filter(r => r.time && !isNaN(r.time))
-    .map(r => ({ time: r.time, value: r.value }))
-    .sort((a,b) => a.time - b.time);
-
+  const pts = rows.filter(r=>r.time&&!isNaN(r.time))
+    .map(r=>({ time:r.time, value:r.value }))
+    .sort((a,b)=>a.time-b.time);
   if (!pts.length) return;
-
   dailySeries.setData(pts);
-  dailyZeroSeries.setData(pts.map(p => ({ time:p.time, value:0 })));
+  dailyZeroSeries.setData(pts.map(p=>({ time:p.time, value:0 })));
   dailyChart.timeScale().fitContent();
 
-  const vals = rows.map(r => r.value);
-  const cum  = parseFloat(vals.reduce((a,b)=>a+b,0).toFixed(2));
-  const best = Math.max(...vals), worst = Math.min(...vals);
-  const wins = vals.filter(v=>v>0).length;
-  document.getElementById('daily-stat-cum').textContent   = fmtSigned(cum);
-  document.getElementById('daily-stat-cum').className     = 'stat-value '+(cum>0?'up':cum<0?'down':'flat');
-  document.getElementById('daily-stat-best').textContent  = fmtSigned(best);
-  document.getElementById('daily-stat-best').className    = 'stat-value up';
-  document.getElementById('daily-stat-worst').textContent = fmtSigned(worst);
-  document.getElementById('daily-stat-worst').className   = 'stat-value down';
-  document.getElementById('daily-stat-wins').textContent  = `${wins} / ${vals.length}`;
+  const vals=rows.map(r=>r.value);
+  const cum=parseFloat(vals.reduce((a,b)=>a+b,0).toFixed(2));
+  const best=Math.max(...vals), worst=Math.min(...vals);
+  const wins=vals.filter(v=>v>0).length;
+  const last=vals.at(-1), prev=vals.length>1?vals.at(-2):null;
+  const chg=prev!==null?parseFloat((last-prev).toFixed(2)):null;
 
-  const last=vals.at(-1), prev=vals.length>1?vals.at(-2):null, chg=prev!==null?last-prev:null;
-  document.getElementById('daily-current-val').textContent = fmtSigned(last);
-  document.getElementById('daily-current-val').className   = last>0?'up':last<0?'down':'flat';
-  if (chg!==null) {
-    document.getElementById('daily-val-change').textContent = `DoD: ${fmtSigned(chg)}`;
-    document.getElementById('daily-val-change').className   = chg>0?'up':chg<0?'down':'flat';
-  }
-  document.getElementById('daily-last-updated').textContent = 'Updated: '+new Date().toLocaleTimeString();
+  document.getElementById('daily-val').textContent=fmtSigned(last);
+  document.getElementById('daily-val').className='big-val '+colorClass(last);
+  document.getElementById('daily-chg').textContent=chg!==null?`DoD: ${fmtSigned(chg)}`:'—';
+  document.getElementById('daily-chg').className='big-chg '+(chg!==null?colorClass(chg):'flat');
+  document.getElementById('daily-cum').textContent=fmtSigned(cum);
+  document.getElementById('daily-cum').className='stat-value '+colorClass(cum);
+  document.getElementById('daily-best').textContent=fmtSigned(best);
+  document.getElementById('daily-worst').textContent=fmtSigned(worst);
+  document.getElementById('daily-wins').textContent=`${wins} / ${vals.length}`;
+  document.getElementById('daily-updated').textContent='Updated: '+new Date().toLocaleTimeString();
 }
 
 function buildDailyTable(rows) {
-  const tbody = document.getElementById('daily-table-body');
+  const tbody=document.getElementById('daily-table-body');
   if (!rows.length) { tbody.innerHTML='<tr><td colspan="4" style="color:var(--sub);text-align:center;">No data yet</td></tr>'; return; }
-  tbody.innerHTML = [...rows].reverse().map(r => {
+  tbody.innerHTML=[...rows].reverse().map(r=>{
     const vc=r.value>0?'td-pos':r.value<0?'td-neg':'td-flat';
     const cc=r.change>0?'td-chg-pos':r.change<0?'td-chg-neg':'td-flat';
     const cumc=r.cumulative>0?'td-chg-pos':r.cumulative<0?'td-chg-neg':'td-flat';
@@ -433,7 +401,7 @@ function buildDailyTable(rows) {
 
 // ── Fetch ────────────────────────────────────────────────────
 async function fetchLog() {
-  const rows = await (await fetch(scriptUrl)).json();
+  const rows=await (await fetch(scriptUrl)).json();
   if (!Array.isArray(rows)||rows.length<2) return [];
   const seen=new Set(), data=[];
   for (let i=1;i<rows.length;i++) {
@@ -449,39 +417,31 @@ async function fetchLog() {
 }
 
 async function fetchGames() {
-  const rows = await (await fetch(scriptUrl+'?sheet=games')).json();
+  const rows=await (await fetch(scriptUrl+'?sheet=games')).json();
   if (!Array.isArray(rows)||rows.length<2) return [];
   return rows.slice(1);
 }
 
 async function fetchDaily() {
-  const rows = await (await fetch(scriptUrl+'?sheet=daily')).json();
+  const rows=await (await fetch(scriptUrl+'?sheet=daily')).json();
   if (!Array.isArray(rows)||rows.length<2) return [];
   const data=[]; let cumulative=0;
   for (let i=1;i<rows.length;i++) {
     const raw=String(rows[i][0]||'').trim(), val=parseFloat(rows[i][1]);
     if (!raw||isNaN(val)) continue;
-
-    // Parse both ISO and m/d/yyyy formats
     let dt;
-    if (raw.includes('T')) {
-      dt = new Date(raw);
-    } else if (raw.includes('/')) {
-      const parts = raw.split('/');
-      if (parts.length < 3) continue;
-      dt = new Date(`${parts[2]}-${String(parts[0]).padStart(2,'0')}-${String(parts[1]).padStart(2,'0')}T12:00:00`);
-    } else {
-      continue;
-    }
+    if (raw.includes('T'))      { dt=new Date(raw); }
+    else if (raw.includes('/')) {
+      const p=raw.split('/');
+      if (p.length<3) continue;
+      dt=new Date(`${p[2]}-${String(p[0]).padStart(2,'0')}-${String(p[1]).padStart(2,'0')}T12:00:00`);
+    } else continue;
     if (isNaN(dt.getTime())) continue;
-
-    const dateStr = `${dt.getMonth()+1}/${dt.getDate()}/${dt.getFullYear()}`;
-    cumulative = parseFloat((cumulative+val).toFixed(2));
+    const dateStr=`${dt.getMonth()+1}/${dt.getDate()}/${dt.getFullYear()}`;
+    cumulative=parseFloat((cumulative+val).toFixed(2));
     data.push({
-      date: dateStr,
-      time: Math.floor(dt.getTime()/1000),
-      value: val,
-      change: i>1 ? parseFloat((val-parseFloat(rows[i-1][1])).toFixed(2)) : null,
+      date:dateStr, time:Math.floor(dt.getTime()/1000), value:val,
+      change:i>1?parseFloat((val-parseFloat(rows[i-1][1])).toFixed(2)):null,
       cumulative
     });
   }
@@ -489,7 +449,7 @@ async function fetchDaily() {
 }
 
 // ── Live UI ──────────────────────────────────────────────────
-function updateChart(logData) {
+function updateLiveChart(logData) {
   if (!logData.length) return;
   const cp=[], lp=[];
   for (const d of logData) {
@@ -501,20 +461,20 @@ function updateChart(logData) {
   seriesLive.setData(lp.sort((a,b)=>a.time-b.time));
 }
 
-function updateUI(logData, games) {
+function updateLiveUI(logData, games) {
   if (!logData.length) return;
   const vals=logData.map(d=>d.value), last=vals.at(-1), open=vals[0];
   const high=Math.max(...vals), low=Math.min(...vals), chg=last-open;
   const pct=((chg/Math.abs(open||1))*100).toFixed(2);
-  const dir=chg>0?'up':chg<0?'down':'flat', sign=chg>=0?'+':'';
-  document.getElementById('current-val').textContent=fmt(last);
-  document.getElementById('current-val').className=dir;
-  document.getElementById('val-change').textContent=`${sign}${fmt(chg)}  (${sign}${pct}%)`;
-  document.getElementById('val-change').className=dir;
-  document.getElementById('stat-open').textContent=fmt(open);
-  document.getElementById('stat-high').textContent=fmt(high);
-  document.getElementById('stat-low').textContent=fmt(low);
-  document.getElementById('last-updated').textContent='Last updated: '+new Date().toLocaleTimeString();
+  const dir=colorClass(chg), sign=chg>=0?'+':'';
+  document.getElementById('live-val').textContent=fmt(last);
+  document.getElementById('live-val').className='big-val '+dir;
+  document.getElementById('live-chg').textContent=`${sign}${fmt(chg)}  (${sign}${pct}%)`;
+  document.getElementById('live-chg').className='big-chg '+dir;
+  document.getElementById('live-open').textContent=fmt(open);
+  document.getElementById('live-high').textContent=fmt(high);
+  document.getElementById('live-low').textContent=fmt(low);
+  document.getElementById('live-updated').textContent='Last updated: '+new Date().toLocaleTimeString();
   if (games&&games.length) buildGameTicker(games);
 }
 
@@ -522,26 +482,27 @@ function updateUI(logData, games) {
 async function refresh() {
   try {
     const [logData,games]=await Promise.all([fetchLog(),fetchGames()]);
-    updateChart(logData); updateUI(logData,games);
+    updateLiveChart(logData);
+    updateLiveUI(logData,games);
   } catch(e) {
-    document.getElementById('last-updated').textContent='Fetch failed — retrying…';
+    document.getElementById('live-updated').textContent='Fetch failed — retrying…';
     console.error(e);
   }
 }
 
 async function refreshDaily() {
   try {
-    const d = await fetchDaily();
-    buildDailyChart(d); buildDailyTable(d); buildDailySidebar(d);
+    const d=await fetchDaily();
+    buildDailyChart(d);
+    buildDailyTable(d);
+    buildDailySidebar(d);
   } catch(e) {
-    document.getElementById('daily-last-updated').textContent='Fetch failed';
+    document.getElementById('daily-updated').textContent='Fetch failed';
     console.error(e);
   }
 }
 
-// Initial load — run both on page open
 refresh();
-refreshDaily();
 setInterval(refresh, 5*60*1000);
 setInterval(refreshDaily, 60*60*1000);
 </script>
