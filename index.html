@@ -495,10 +495,11 @@ async function refresh() {
 
 async function refreshDaily() {
   try {
-    const d=await fetchDaily();
+    const d = await fetchDaily();
     buildDailyChart(d);
     buildDailyTable(d);
     buildDailySidebar(d);
+    setTimeout(() => dailyChart.timeScale().fitContent(), 50);
   } catch(e) {
     document.getElementById('daily-updated').textContent='Fetch failed';
     console.error(e);
