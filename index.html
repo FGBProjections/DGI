@@ -14,7 +14,7 @@
   }
   body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;
     min-height:100vh;padding:40px 20px;}
- 
+
   /* ── Tab navigation ─────────────────────────────────────── */
   .tab-nav{
     display:flex;gap:2px;margin-bottom:24px;
@@ -32,7 +32,7 @@
   .tab-panel{display:none;}
   .tab-panel.active{display:flex;flex-direction:row;align-items:flex-start;gap:20px;}
   .tab-panel.daily-panel.active{display:block;}
- 
+
   /* ── Ticker panel ────────────────────────────────────────── */
   .ticker-panel{
     width:210px;flex-shrink:0;
@@ -48,7 +48,7 @@
     scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
   .ticker-feed::-webkit-scrollbar{width:4px;}
   .ticker-feed::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
- 
+
   /* ── Cards ───────────────────────────────────────────────── */
   .tick-item{padding:11px 14px;border-bottom:1px solid var(--border);
     display:flex;flex-direction:column;gap:4px;animation:slideIn .3s ease;}
@@ -69,7 +69,7 @@
   .tick-projval.zero{color:var(--sub);}
   .ticker-empty{padding:24px 14px;text-align:center;
     font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);line-height:1.8;}
- 
+
   /* ── Legend ──────────────────────────────────────────────── */
   .legend{display:flex;gap:16px;align-items:center;}
   .legend-item{display:flex;align-items:center;gap:6px;
@@ -77,7 +77,7 @@
   .legend-line{width:20px;height:2px;border-radius:1px;}
   .legend-line.solid{background:var(--green);}
   .legend-line.dotted{background:none;border-top:2px dashed #fbbf24;height:0;margin-top:1px;}
- 
+
   /* ── Main col ────────────────────────────────────────────── */
   .main-col{flex:1;min-width:0;max-width:900px;display:flex;flex-direction:column;}
   .topbar{display:flex;align-items:flex-start;justify-content:space-between;
@@ -91,14 +91,14 @@
   #val-change,#daily-val-change{font-family:'IBM Plex Mono',monospace;font-size:13px;
     margin-top:5px;font-weight:500;}
   .up{color:var(--green)}.down{color:var(--red)}.flat{color:var(--sub)}
- 
+
   .stats-row{display:flex;gap:1px;background:var(--border);
     border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px;}
   .stat{flex:1;background:var(--surface);padding:12px 16px;display:flex;flex-direction:column;gap:3px;}
   .stat-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--sub);
     font-family:'IBM Plex Mono',monospace;}
   .stat-value{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500;color:var(--text);}
- 
+
   .chart-wrapper{background:var(--surface);border:1px solid var(--border);
     border-radius:10px;overflow:hidden;}
   .chart-toolbar{display:flex;align-items:center;justify-content:space-between;
@@ -111,18 +111,18 @@
     animation:pulse 1.6s ease-in-out infinite;}
   @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
   #chart,#daily-chart{width:100%;height:380px;}
- 
+
   .footer{display:flex;justify-content:space-between;align-items:center;
     margin-top:14px;padding:0 2px;}
   #last-updated{font-size:11px;color:var(--sub);font-family:'IBM Plex Mono',monospace;}
   .source-label{font-size:11px;color:var(--muted);font-family:'IBM Plex Mono',monospace;}
- 
+
   /* ── Daily tab ───────────────────────────────────────────── */
   .daily-layout{display:flex;gap:20px;align-items:flex-start;}
   .daily-main{flex:1;min-width:0;max-width:900px;display:flex;flex-direction:column;}
   .daily-topbar{display:flex;align-items:flex-start;justify-content:space-between;
     margin-bottom:24px;flex-wrap:wrap;gap:16px;}
- 
+
   /* ── History table ───────────────────────────────────────── */
   .history-table-wrap{margin-top:20px;background:var(--surface);
     border:1px solid var(--border);border-radius:10px;overflow:hidden;}
@@ -142,7 +142,7 @@
   .td-flat{color:var(--sub);}
   .td-chg-pos{color:var(--green);}
   .td-chg-neg{color:var(--red);}
- 
+
   @media(max-width:760px){
     .tab-panel.active,.daily-layout{flex-direction:column;align-items:stretch;}
     .ticker-panel{width:100%;position:static;}
@@ -152,13 +152,13 @@
 </style>
 </head>
 <body>
- 
+
 <!-- ═══ TABS ════════════════════════════════════════════════ -->
 <div class="tab-nav">
   <button class="tab-btn active" onclick="switchTab('live')">Live</button>
   <button class="tab-btn" onclick="switchTab('daily')">Daily History</button>
 </div>
- 
+
 <!-- ═══ LIVE TAB ════════════════════════════════════════════ -->
 <div class="tab-panel active" id="tab-live">
   <aside class="ticker-panel">
@@ -170,7 +170,7 @@
       <div class="ticker-empty">Waiting<br/>for data…</div>
     </div>
   </aside>
- 
+
   <div class="main-col">
     <div class="topbar">
       <div>
@@ -207,7 +207,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- ═══ DAILY HISTORY TAB ═══════════════════════════════════ -->
 <div class="tab-panel daily-panel" id="tab-daily">
   <div class="daily-layout">
@@ -220,7 +220,7 @@
         <div class="ticker-empty">Loading…</div>
       </div>
     </aside>
- 
+
     <div class="daily-main">
       <div class="daily-topbar">
         <div>
@@ -232,14 +232,14 @@
           <div id="daily-val-change" class="flat">— / —</div>
         </div>
       </div>
- 
+
       <div class="stats-row">
         <div class="stat"><span class="stat-label">Cumulative</span><span class="stat-value" id="daily-stat-cum">—</span></div>
         <div class="stat"><span class="stat-label">Best Day</span><span class="stat-value" id="daily-stat-best">—</span></div>
         <div class="stat"><span class="stat-label">Worst Day</span><span class="stat-value" id="daily-stat-worst">—</span></div>
         <div class="stat"><span class="stat-label">Win Days</span><span class="stat-value" id="daily-stat-wins">—</span></div>
       </div>
- 
+
       <div class="chart-wrapper">
         <div class="chart-toolbar">
           <span class="chart-title">ProjValue — Day by Day</span>
@@ -247,7 +247,7 @@
         </div>
         <div id="daily-chart"></div>
       </div>
- 
+
       <div class="history-table-wrap">
         <div class="history-table-header">Full History</div>
         <table>
@@ -262,21 +262,26 @@
     </div>
   </div>
 </div>
- 
+
 <script>
 const scriptUrl = 'https://script.google.com/macros/s/AKfycbzMb5yE0GnyRqPutKHBobDFsU5W7f1AeIKYQAqTtGtOFyTZ-BesBYrQsjsg2tpnkwmG/exec';
 const COL = { TIME:0, TEAM:1, HA:2, SCORE:3, OPP:4, STATUS:5, INNING:6, WL:7, PROJVALUE:15 };
- 
+
 // ── Tab switching ────────────────────────────────────────────
 function switchTab(tab) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelector(`.tab-btn[onclick="switchTab('${tab}')"]`).classList.add('active');
   document.getElementById('tab-' + tab).classList.add('active');
-  if (tab === 'daily') refreshDaily();
+  if (tab === 'daily') {
+    refreshDaily();
+    setTimeout(() => dailyChart.applyOptions({ width: dailyChartEl.offsetWidth }), 50);
+  } else {
+    setTimeout(() => chart.applyOptions({ width: chartEl.offsetWidth }), 50);
+  }
 }
- 
-// ── Live charts ──────────────────────────────────────────────
+
+// ── Live chart ───────────────────────────────────────────────
 const chartEl = document.getElementById('chart');
 const chart = LightweightCharts.createChart(chartEl, {
   layout:{ background:{color:'#111318'}, textColor:'#6b7280' },
@@ -291,7 +296,7 @@ const seriesCompleted = chart.addLineSeries({ color:'#00d97e', lineWidth:2,
 const seriesLive = chart.addLineSeries({ color:'#fbbf24', lineWidth:1.5, lineStyle:1,
   priceLineVisible:false, lastValueVisible:true, crosshairMarkerVisible:true });
 new ResizeObserver(() => chart.applyOptions({ width: chartEl.offsetWidth })).observe(chartEl);
- 
+
 // ── Daily chart ──────────────────────────────────────────────
 const dailyChartEl = document.getElementById('daily-chart');
 const dailyChart = LightweightCharts.createChart(dailyChartEl, {
@@ -308,7 +313,7 @@ const dailySeries = dailyChart.addLineSeries({ color:'#3b82f6', lineWidth:2,
 const dailyZeroSeries = dailyChart.addLineSeries({ color:'#3a3f4a', lineWidth:1,
   lineStyle:2, priceLineVisible:false, lastValueVisible:false, crosshairMarkerVisible:false });
 new ResizeObserver(() => dailyChart.applyOptions({ width: dailyChartEl.offsetWidth })).observe(dailyChartEl);
- 
+
 // ── Helpers ──────────────────────────────────────────────────
 const fmt = n => n == null ? '—' :
   Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -316,7 +321,7 @@ const fmtSigned = n => {
   if (n == null || isNaN(n)) return '—';
   return (n > 0 ? '+' : '') + fmt(n);
 };
- 
+
 // ── Live ticker ──────────────────────────────────────────────
 function buildGameTicker(games) {
   const feed = document.getElementById('ticker-feed');
@@ -349,7 +354,7 @@ function buildGameTicker(games) {
     </div>`;
   }).join('');
 }
- 
+
 // ── Daily sidebar ────────────────────────────────────────────
 function buildDailySidebar(rows) {
   const feed = document.getElementById('daily-ticker-feed');
@@ -365,18 +370,23 @@ function buildDailySidebar(rows) {
     </div>`;
   }).join('');
 }
- 
+
 // ── Daily chart + stats ──────────────────────────────────────
 function buildDailyChart(rows) {
   if (!rows.length) return;
-  const pts = rows.map(r => {
-    const d = new Date(r.date);
-    return { time: Math.floor(d.getTime()/1000), value: r.value };
-  }).filter(p => !isNaN(p.time)).sort((a,b) => a.time - b.time);
+
+  // Use pre-computed time field — no re-parsing needed
+  const pts = rows
+    .filter(r => r.time && !isNaN(r.time))
+    .map(r => ({ time: r.time, value: r.value }))
+    .sort((a,b) => a.time - b.time);
+
+  if (!pts.length) return;
+
   dailySeries.setData(pts);
   dailyZeroSeries.setData(pts.map(p => ({ time:p.time, value:0 })));
   dailyChart.timeScale().fitContent();
- 
+
   const vals = rows.map(r => r.value);
   const cum  = parseFloat(vals.reduce((a,b)=>a+b,0).toFixed(2));
   const best = Math.max(...vals), worst = Math.min(...vals);
@@ -388,7 +398,7 @@ function buildDailyChart(rows) {
   document.getElementById('daily-stat-worst').textContent = fmtSigned(worst);
   document.getElementById('daily-stat-worst').className   = 'stat-value down';
   document.getElementById('daily-stat-wins').textContent  = `${wins} / ${vals.length}`;
- 
+
   const last=vals.at(-1), prev=vals.length>1?vals.at(-2):null, chg=prev!==null?last-prev:null;
   document.getElementById('daily-current-val').textContent = fmtSigned(last);
   document.getElementById('daily-current-val').className   = last>0?'up':last<0?'down':'flat';
@@ -398,7 +408,7 @@ function buildDailyChart(rows) {
   }
   document.getElementById('daily-last-updated').textContent = 'Updated: '+new Date().toLocaleTimeString();
 }
- 
+
 function buildDailyTable(rows) {
   const tbody = document.getElementById('daily-table-body');
   if (!rows.length) { tbody.innerHTML='<tr><td colspan="4" style="color:var(--sub);text-align:center;">No data yet</td></tr>'; return; }
@@ -414,7 +424,7 @@ function buildDailyTable(rows) {
     </tr>`;
   }).join('');
 }
- 
+
 // ── Fetch ────────────────────────────────────────────────────
 async function fetchLog() {
   const rows = await (await fetch(scriptUrl)).json();
@@ -431,13 +441,13 @@ async function fetchLog() {
   }
   return data.sort((a,b)=>a.time-b.time);
 }
- 
+
 async function fetchGames() {
   const rows = await (await fetch(scriptUrl+'?sheet=games')).json();
   if (!Array.isArray(rows)||rows.length<2) return [];
   return rows.slice(1);
 }
- 
+
 async function fetchDaily() {
   const rows = await (await fetch(scriptUrl+'?sheet=daily')).json();
   if (!Array.isArray(rows)||rows.length<2) return [];
@@ -446,7 +456,7 @@ async function fetchDaily() {
     const raw=String(rows[i][0]||'').trim(), val=parseFloat(rows[i][1]);
     if (!raw||isNaN(val)) continue;
 
-    // Parse both ISO and m/d/yyyy formats into a timestamp for the chart
+    // Parse both ISO and m/d/yyyy formats
     let dt;
     if (raw.includes('T')) {
       dt = new Date(raw);
@@ -459,7 +469,6 @@ async function fetchDaily() {
     }
     if (isNaN(dt.getTime())) continue;
 
-    // Clean display date
     const dateStr = `${dt.getMonth()+1}/${dt.getDate()}/${dt.getFullYear()}`;
     cumulative = parseFloat((cumulative+val).toFixed(2));
     data.push({
@@ -472,7 +481,7 @@ async function fetchDaily() {
   }
   return data;
 }
- 
+
 // ── Live UI ──────────────────────────────────────────────────
 function updateChart(logData) {
   if (!logData.length) return;
@@ -485,7 +494,7 @@ function updateChart(logData) {
   seriesCompleted.setData(cp.sort((a,b)=>a.time-b.time));
   seriesLive.setData(lp.sort((a,b)=>a.time-b.time));
 }
- 
+
 function updateUI(logData, games) {
   if (!logData.length) return;
   const vals=logData.map(d=>d.value), last=vals.at(-1), open=vals[0];
@@ -502,7 +511,7 @@ function updateUI(logData, games) {
   document.getElementById('last-updated').textContent='Last updated: '+new Date().toLocaleTimeString();
   if (games&&games.length) buildGameTicker(games);
 }
- 
+
 // ── Refresh ──────────────────────────────────────────────────
 async function refresh() {
   try {
@@ -513,19 +522,22 @@ async function refresh() {
     console.error(e);
   }
 }
- 
+
 async function refreshDaily() {
   try {
-    const d=await fetchDaily();
+    const d = await fetchDaily();
     buildDailyChart(d); buildDailyTable(d); buildDailySidebar(d);
   } catch(e) {
     document.getElementById('daily-last-updated').textContent='Fetch failed';
     console.error(e);
   }
 }
- 
+
+// Initial load — run both on page open
 refresh();
+refreshDaily();
 setInterval(refresh, 5*60*1000);
+setInterval(refreshDaily, 60*60*1000);
 </script>
 </body>
 </html>
