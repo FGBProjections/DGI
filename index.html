@@ -360,6 +360,8 @@ function buildDailyChart(rows) {
     .map(r=>({ time:r.time, value:r.value }))
     .sort((a,b)=>a.time-b.time);
   if (!pts.length) return;
+  const w = dailyChartEl.offsetWidth;
+  if (w > 0) dailyChart.applyOptions({ width: w, height: 380 });
   dailySeries.setData(pts);
   dailyZeroSeries.setData(pts.map(p=>({ time:p.time, value:0 })));
   dailyChart.timeScale().fitContent();
