@@ -303,9 +303,7 @@ new ResizeObserver(() => chart.applyOptions({ width: chartEl.offsetWidth })).obs
 // ── Daily chart ──────────────────────────────────────────────
 const dailyChartEl = document.getElementById('daily-chart');
 const dailyChart = LightweightCharts.createChart(dailyChartEl, {
-  layout:{ background:{color:'#111318'}, textColor:'#6b7280', type: 'solid' },
-  handleScroll: true,
-  handleScale: true,
+  layout:{ background:{color:'#111318'}, textColor:'#6b7280' },
   grid:{ vertLines:{color:'#1e2128'}, horzLines:{color:'#1e2128'} },
   crosshair:{ vertLine:{color:'#3a3f4a',labelBackgroundColor:'#1e2128'},
               horzLine:{color:'#3a3f4a',labelBackgroundColor:'#1e2128'} },
