@@ -443,11 +443,29 @@ async function fetchDaily() {
   if (!Array.isArray(rows)||rows.length<2) return [];
   const data=[]; let cumulative=0;
   for (let i=1;i<rows.length;i++) {
-    const date=String(rows[i][0]||'').trim(), val=parseFloat(rows[i][1]);
-    if (!date||isNaN(val)) continue;
-    cumulative=parseFloat((cumulative+val).toFixed(2));
+    const raw=String(rows[i][0]||'').trim(), val=parseFloat(rows[i][1]);
+    if (!raw||isNaN(val)) continue;
+
+    // Parse both ISO and m/d/yyyy formats into a timestamp for the chart
+    let dt;
+    if (raw.includes('T')) {
+      dt = new Date(raw);
+    } else if (raw.includes('/')) {
+      const parts = raw.split('/');
+      if (parts.length < 3) continue;
+      dt = new Date(`${parts[2]}-${String(parts[0]).padStart(2,'0')}-${String(parts[1]).padStart(2,'0')}T12:00:00`);
+    } else {
+      continue;
+    }
+    if (isNaN(dt.getTime())) continue;
+
+    // Clean display date
+    const dateStr = `${dt.getMonth()+1}/${dt.getDate()}/${dt.getFullYear()}`;
+    cumulative = parseFloat((cumulative+val).toFixed(2));
     data.push({
-      date, value:val,
+      date: dateStr,
+      time: Math.floor(dt.getTime()/1000),
+      value: val,
       change: i>1 ? parseFloat((val-parseFloat(rows[i-1][1])).toFixed(2)) : null,
       cumulative
     });
