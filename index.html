@@ -11,22 +11,28 @@
   :root{
     --bg:#0a0c0f;--surface:#111318;--border:#1e2128;--muted:#3a3f4a;
     --text:#e8eaf0;--sub:#6b7280;--green:#00d97e;--red:#ff4d6a;--accent:#3b82f6;
+    --orange:#f97316;--yellow:#fbbf24;
   }
   body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;
     min-height:100vh;padding:40px 20px;}
 
+  /* ── Tab nav ─────────────────────────────────────────────── */
   .tab-nav{display:flex;gap:2px;margin-bottom:24px;background:var(--surface);
-    border:1px solid var(--border);border-radius:8px;padding:4px;width:fit-content;}
+    border:1px solid var(--border);border-radius:8px;padding:4px;
+    width:fit-content;flex-wrap:wrap;}
   .tab-btn{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;
-    text-transform:uppercase;padding:8px 20px;border-radius:5px;border:none;
+    text-transform:uppercase;padding:8px 16px;border-radius:5px;border:none;
     cursor:pointer;transition:all .2s;background:transparent;color:var(--sub);}
   .tab-btn.active{background:var(--border);color:var(--text);font-weight:600;}
   .tab-btn:hover:not(.active){color:var(--text);}
 
+  /* ── Page visibility ─────────────────────────────────────── */
   .page{display:none;flex-direction:row;align-items:flex-start;gap:20px;}
   .page.active{display:flex;}
   .page.daily-page.active{display:block;}
+  .page.combined-page.active{display:flex;flex-direction:column;}
 
+  /* ── Ticker panel ────────────────────────────────────────── */
   .ticker-panel{width:210px;flex-shrink:0;background:var(--surface);
     border:1px solid var(--border);border-radius:10px;overflow:hidden;
     position:sticky;top:40px;display:flex;flex-direction:column;}
@@ -40,6 +46,7 @@
   .ticker-feed::-webkit-scrollbar{width:4px;}
   .ticker-feed::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 
+  /* ── Cards ───────────────────────────────────────────────── */
   .tick-item{padding:11px 14px;border-bottom:1px solid var(--border);
     display:flex;flex-direction:column;gap:4px;animation:slideIn .3s ease;}
   .tick-item:last-child{border-bottom:none;}
@@ -60,13 +67,17 @@
   .ticker-empty{padding:24px 14px;text-align:center;font-family:'IBM Plex Mono',monospace;
     font-size:10px;color:var(--muted);line-height:1.8;}
 
+  /* ── Legend ──────────────────────────────────────────────── */
   .legend{display:flex;gap:16px;align-items:center;}
   .legend-item{display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;
     font-size:10px;color:var(--sub);}
   .legend-line{width:20px;height:2px;border-radius:1px;}
-  .legend-line.solid{background:var(--green);}
-  .legend-line.dotted{background:none;border-top:2px dashed #fbbf24;height:0;margin-top:1px;}
+  .legend-line.solid-green{background:var(--green);}
+  .legend-line.solid-orange{background:var(--orange);}
+  .legend-line.solid-blue{background:var(--accent);}
+  .legend-line.dotted{background:none;border-top:2px dashed var(--yellow);height:0;margin-top:1px;}
 
+  /* ── Main col ────────────────────────────────────────────── */
   .main-col{flex:1;min-width:0;max-width:900px;display:flex;flex-direction:column;}
   .topbar{display:flex;align-items:flex-start;justify-content:space-between;
     margin-bottom:24px;flex-wrap:wrap;gap:16px;}
@@ -86,7 +97,8 @@
     font-family:'IBM Plex Mono',monospace;}
   .stat-value{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500;color:var(--text);}
 
-  .chart-wrapper{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+  .chart-wrapper{background:var(--surface);border:1px solid var(--border);
+    border-radius:10px;overflow:hidden;}
   .chart-toolbar{display:flex;align-items:center;justify-content:space-between;
     padding:14px 20px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:10px;}
   .chart-title{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;
@@ -96,13 +108,14 @@
   .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);
     animation:pulse 1.6s ease-in-out infinite;}
   @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
-  #chart-container{width:100%;height:380px;}
+  .chart-el{width:100%;height:380px;}
 
   .footer{display:flex;justify-content:space-between;align-items:center;
     margin-top:14px;padding:0 2px;}
   .last-updated{font-size:11px;color:var(--sub);font-family:'IBM Plex Mono',monospace;}
   .source-label{font-size:11px;color:var(--muted);font-family:'IBM Plex Mono',monospace;}
 
+  /* ── Daily tab ───────────────────────────────────────────── */
   .daily-layout{display:flex;gap:20px;align-items:flex-start;}
   .daily-main{flex:1;min-width:0;max-width:900px;display:flex;flex-direction:column;}
 
@@ -125,8 +138,17 @@
   .td-chg-pos{color:var(--green);}
   .td-chg-neg{color:var(--red);}
 
+  /* ── Combined tab ────────────────────────────────────────── */
+  .combined-sports-row{display:flex;gap:16px;margin-bottom:16px;}
+  .combined-sport-block{flex:1;background:var(--surface);border:1px solid var(--border);
+    border-radius:10px;padding:16px 20px;}
+  .combined-sport-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--sub);margin-bottom:6px;}
+  .combined-sport-val{font-family:'IBM Plex Mono',monospace;font-size:28px;font-weight:600;}
+  .combined-sport-sub{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--sub);margin-top:4px;}
+
   @media(max-width:760px){
-    .page.active,.daily-layout{flex-direction:column;align-items:stretch;}
+    .page.active,.daily-layout,.combined-sports-row{flex-direction:column;align-items:stretch;}
     .ticker-panel{width:100%;position:static;}
     .ticker-feed{max-height:240px;}
     .main-col,.daily-main{max-width:100%;}
@@ -135,105 +157,230 @@
 </head>
 <body>
 
+<!-- ═══ TAB NAV ═════════════════════════════════════════════ -->
 <div class="tab-nav">
-  <button class="tab-btn active" onclick="switchTab('live')">Live</button>
-  <button class="tab-btn" onclick="switchTab('daily')">Daily History</button>
+  <button class="tab-btn active" onclick="switchTab('mlb-live')">MLB Live</button>
+  <button class="tab-btn" onclick="switchTab('mlb-daily')">MLB Daily</button>
+  <button class="tab-btn" onclick="switchTab('nfl-live')">NFL Live</button>
+  <button class="tab-btn" onclick="switchTab('nfl-daily')">NFL Daily</button>
+  <button class="tab-btn" onclick="switchTab('combined')">Combined</button>
 </div>
 
-<!-- ═══ LIVE PAGE ════════════════════════════════════════════ -->
-<div class="page active" id="page-live">
+<!-- ═══ MLB LIVE ═════════════════════════════════════════════ -->
+<div class="page active" id="page-mlb-live">
   <aside class="ticker-panel">
     <div class="ticker-panel-header">
       <span class="ticker-panel-title">Game Results</span>
-      <span class="ticker-count" id="tick-count">—</span>
+      <span class="ticker-count" id="mlb-tick-count">—</span>
     </div>
-    <div class="ticker-feed" id="ticker-feed">
+    <div class="ticker-feed" id="mlb-ticker-feed">
       <div class="ticker-empty">Waiting<br/>for data…</div>
     </div>
   </aside>
   <div class="main-col">
     <div class="topbar">
-      <div>
-        <div class="ticker-label">Live Sum Tracker</div>
-        <div class="big-title">PROJVALUE SUM</div>
-      </div>
+      <div><div class="ticker-label">MLB Live Sum Tracker</div><div class="big-title">PROJVALUE SUM</div></div>
       <div class="price-block">
-        <div id="live-val" class="big-val flat">—</div>
-        <div id="live-chg" class="big-chg flat">— / —</div>
+        <div id="mlb-live-val" class="big-val flat">—</div>
+        <div id="mlb-live-chg" class="big-chg flat">— / —</div>
       </div>
     </div>
     <div class="stats-row">
-      <div class="stat"><span class="stat-label">Session Open</span><span class="stat-value" id="live-open">—</span></div>
-      <div class="stat"><span class="stat-label">High</span><span class="stat-value" id="live-high">—</span></div>
-      <div class="stat"><span class="stat-label">Low</span><span class="stat-value" id="live-low">—</span></div>
-      <div class="stat"><span class="stat-label">Finals</span><span class="stat-value" id="live-finals">—</span></div>
+      <div class="stat"><span class="stat-label">Session Open</span><span class="stat-value" id="mlb-stat-open">—</span></div>
+      <div class="stat"><span class="stat-label">High</span><span class="stat-value" id="mlb-stat-high">—</span></div>
+      <div class="stat"><span class="stat-label">Low</span><span class="stat-value" id="mlb-stat-low">—</span></div>
+      <div class="stat"><span class="stat-label">Finals</span><span class="stat-value" id="mlb-stat-finals">—</span></div>
     </div>
     <div class="chart-wrapper">
       <div class="chart-toolbar">
-        <span class="chart-title" id="chart-label">ProjValue Sum — 5 min intervals</span>
+        <span class="chart-title">MLB ProjValue Sum — 5 min intervals</span>
         <div style="display:flex;align-items:center;gap:16px;">
-          <div class="legend" id="live-legend">
-            <div class="legend-item"><div class="legend-line solid"></div><span>Completed</span></div>
+          <div class="legend">
+            <div class="legend-item"><div class="legend-line solid-green"></div><span>Completed</span></div>
             <div class="legend-item"><div class="legend-line dotted"></div><span>Live</span></div>
           </div>
           <span class="live-badge"><span class="live-dot"></span> LIVE</span>
         </div>
       </div>
-      <div id="chart-container"></div>
+      <div id="mlb-live-chart" class="chart-el"></div>
     </div>
     <div class="footer">
-      <span id="live-updated" class="last-updated">Loading…</span>
+      <span id="mlb-live-updated" class="last-updated">Loading…</span>
       <span class="source-label">SRC: GOOGLE SHEETS / LOG</span>
     </div>
   </div>
 </div>
 
-<!-- ═══ DAILY PAGE ═══════════════════════════════════════════ -->
-<div class="page daily-page" id="page-daily">
+<!-- ═══ MLB DAILY ════════════════════════════════════════════ -->
+<div class="page daily-page" id="page-mlb-daily">
   <div class="daily-layout">
     <aside class="ticker-panel">
       <div class="ticker-panel-header">
-        <span class="ticker-panel-title">Season Log</span>
-        <span class="ticker-count" id="daily-day-count">—</span>
+        <span class="ticker-panel-title">MLB Season Log</span>
+        <span class="ticker-count" id="mlb-daily-day-count">—</span>
       </div>
-      <div class="ticker-feed" id="daily-ticker-feed">
-        <div class="ticker-empty">Loading…</div>
-      </div>
+      <div class="ticker-feed" id="mlb-daily-ticker-feed"><div class="ticker-empty">Loading…</div></div>
     </aside>
     <div class="daily-main">
       <div class="topbar">
-        <div>
-          <div class="ticker-label">Daily History</div>
-          <div class="big-title">PROJVALUE / DAY</div>
-        </div>
+        <div><div class="ticker-label">MLB Daily History</div><div class="big-title">PROJVALUE / DAY</div></div>
         <div class="price-block">
-          <div id="daily-val" class="big-val flat">—</div>
-          <div id="daily-chg" class="big-chg flat">— / —</div>
+          <div id="mlb-daily-val" class="big-val flat">—</div>
+          <div id="mlb-daily-chg" class="big-chg flat">— / —</div>
         </div>
       </div>
       <div class="stats-row">
-        <div class="stat"><span class="stat-label">Cumulative</span><span class="stat-value" id="daily-cum">—</span></div>
-        <div class="stat"><span class="stat-label">Best Day</span><span class="stat-value" id="daily-best">—</span></div>
-        <div class="stat"><span class="stat-label">Worst Day</span><span class="stat-value" id="daily-worst">—</span></div>
-        <div class="stat"><span class="stat-label">Win Days</span><span class="stat-value" id="daily-wins">—</span></div>
+        <div class="stat"><span class="stat-label">Cumulative</span><span class="stat-value" id="mlb-daily-cum">—</span></div>
+        <div class="stat"><span class="stat-label">Best Day</span><span class="stat-value" id="mlb-daily-best">—</span></div>
+        <div class="stat"><span class="stat-label">Worst Day</span><span class="stat-value" id="mlb-daily-worst">—</span></div>
+        <div class="stat"><span class="stat-label">Win Days</span><span class="stat-value" id="mlb-daily-wins">—</span></div>
       </div>
       <div class="chart-wrapper">
         <div class="chart-toolbar">
-          <span class="chart-title">ProjValue — Day by Day</span>
-          <span id="daily-updated" class="last-updated">Loading…</span>
+          <span class="chart-title">MLB ProjValue — Day by Day</span>
+          <span id="mlb-daily-updated" class="last-updated">Loading…</span>
         </div>
-        <div id="daily-chart-container" style="width:100%;height:380px;"></div>
+        <div id="mlb-daily-chart" class="chart-el"></div>
       </div>
       <div class="history-table-wrap">
         <div class="history-table-header">Full History</div>
-        <table>
-          <thead><tr><th>Date</th><th>ProjValue</th><th>Day Change</th><th>Cumulative</th></tr></thead>
-          <tbody id="daily-table-body">
-            <tr><td colspan="4" style="color:var(--sub);text-align:center;">Loading…</td></tr>
-          </tbody>
-        </table>
+        <table><thead><tr><th>Date</th><th>ProjValue</th><th>Day Change</th><th>Cumulative</th></tr></thead>
+        <tbody id="mlb-daily-table"><tr><td colspan="4" style="color:var(--sub);text-align:center;">Loading…</td></tr></tbody></table>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ═══ NFL LIVE ══════════════════════════════════════════════ -->
+<div class="page" id="page-nfl-live">
+  <aside class="ticker-panel">
+    <div class="ticker-panel-header">
+      <span class="ticker-panel-title">NFL Results</span>
+      <span class="ticker-count" id="nfl-tick-count">—</span>
+    </div>
+    <div class="ticker-feed" id="nfl-ticker-feed">
+      <div class="ticker-empty">Waiting<br/>for data…</div>
+    </div>
+  </aside>
+  <div class="main-col">
+    <div class="topbar">
+      <div><div class="ticker-label">NFL Live Sum Tracker</div><div class="big-title">PROJVALUE SUM</div></div>
+      <div class="price-block">
+        <div id="nfl-live-val" class="big-val flat">—</div>
+        <div id="nfl-live-chg" class="big-chg flat">— / —</div>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><span class="stat-label">Session Open</span><span class="stat-value" id="nfl-stat-open">—</span></div>
+      <div class="stat"><span class="stat-label">High</span><span class="stat-value" id="nfl-stat-high">—</span></div>
+      <div class="stat"><span class="stat-label">Low</span><span class="stat-value" id="nfl-stat-low">—</span></div>
+      <div class="stat"><span class="stat-label">Finals</span><span class="stat-value" id="nfl-stat-finals">—</span></div>
+    </div>
+    <div class="chart-wrapper">
+      <div class="chart-toolbar">
+        <span class="chart-title">NFL ProjValue Sum — 5 min intervals</span>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div class="legend">
+            <div class="legend-item"><div class="legend-line solid-orange"></div><span>Completed</span></div>
+            <div class="legend-item"><div class="legend-line dotted"></div><span>Live</span></div>
+          </div>
+          <span class="live-badge" style="color:var(--orange);">
+            <span class="live-dot" style="background:var(--orange);"></span> LIVE
+          </span>
+        </div>
+      </div>
+      <div id="nfl-live-chart" class="chart-el"></div>
+    </div>
+    <div class="footer">
+      <span id="nfl-live-updated" class="last-updated">Loading…</span>
+      <span class="source-label">SRC: GOOGLE SHEETS / NFL LOG</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NFL DAILY ════════════════════════════════════════════ -->
+<div class="page daily-page" id="page-nfl-daily">
+  <div class="daily-layout">
+    <aside class="ticker-panel">
+      <div class="ticker-panel-header">
+        <span class="ticker-panel-title">NFL Season Log</span>
+        <span class="ticker-count" id="nfl-daily-day-count">—</span>
+      </div>
+      <div class="ticker-feed" id="nfl-daily-ticker-feed"><div class="ticker-empty">Loading…</div></div>
+    </aside>
+    <div class="daily-main">
+      <div class="topbar">
+        <div><div class="ticker-label">NFL Daily History</div><div class="big-title">PROJVALUE / DAY</div></div>
+        <div class="price-block">
+          <div id="nfl-daily-val" class="big-val flat">—</div>
+          <div id="nfl-daily-chg" class="big-chg flat">— / —</div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><span class="stat-label">Cumulative</span><span class="stat-value" id="nfl-daily-cum">—</span></div>
+        <div class="stat"><span class="stat-label">Best Day</span><span class="stat-value" id="nfl-daily-best">—</span></div>
+        <div class="stat"><span class="stat-label">Worst Day</span><span class="stat-value" id="nfl-daily-worst">—</span></div>
+        <div class="stat"><span class="stat-label">Win Days</span><span class="stat-value" id="nfl-daily-wins">—</span></div>
+      </div>
+      <div class="chart-wrapper">
+        <div class="chart-toolbar">
+          <span class="chart-title">NFL ProjValue — Day by Day</span>
+          <span id="nfl-daily-updated" class="last-updated">Loading…</span>
+        </div>
+        <div id="nfl-daily-chart" class="chart-el"></div>
+      </div>
+      <div class="history-table-wrap">
+        <div class="history-table-header">Full History</div>
+        <table><thead><tr><th>Date</th><th>ProjValue</th><th>Day Change</th><th>Cumulative</th></tr></thead>
+        <tbody id="nfl-daily-table"><tr><td colspan="4" style="color:var(--sub);text-align:center;">Loading…</td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ COMBINED ═════════════════════════════════════════════ -->
+<div class="page combined-page" id="page-combined">
+  <div class="topbar">
+    <div><div class="ticker-label">Season Performance</div><div class="big-title">MLB + NFL COMBINED</div></div>
+    <div class="price-block">
+      <div id="combined-total" class="big-val flat">—</div>
+      <div id="combined-sub" class="big-chg flat">Combined cumulative</div>
+    </div>
+  </div>
+
+  <div class="combined-sports-row">
+    <div class="combined-sport-block">
+      <div class="combined-sport-label">⚾ MLB</div>
+      <div id="combined-mlb-val" class="combined-sport-val flat">—</div>
+      <div id="combined-mlb-sub" class="combined-sport-sub">— days tracked</div>
+    </div>
+    <div class="combined-sport-block">
+      <div class="combined-sport-label">🏈 NFL</div>
+      <div id="combined-nfl-val" class="combined-sport-val flat">—</div>
+      <div id="combined-nfl-sub" class="combined-sport-sub">— days tracked</div>
+    </div>
+  </div>
+
+  <div class="chart-wrapper" style="margin-bottom:16px;">
+    <div class="chart-toolbar">
+      <span class="chart-title">MLB vs NFL — Daily ProjValue History</span>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-line solid-green"></div><span>MLB</span></div>
+        <div class="legend-item"><div class="legend-line solid-orange"></div><span>NFL</span></div>
+      </div>
+    </div>
+    <div id="combined-chart" class="chart-el"></div>
+  </div>
+
+  <div class="history-table-wrap">
+    <div class="history-table-header">Day by Day — Both Sports</div>
+    <table><thead><tr><th>Date</th><th>MLB</th><th>NFL</th><th>Day Total</th></tr></thead>
+    <tbody id="combined-table"><tr><td colspan="4" style="color:var(--sub);text-align:center;">Loading…</td></tr></tbody></table>
+  </div>
+
+  <div class="footer" style="margin-top:14px;">
+    <span id="combined-updated" class="last-updated">Loading…</span>
+    <span class="source-label">SRC: MLB DAILY LOG + NFL DAILY LOG</span>
   </div>
 </div>
 
@@ -242,87 +389,107 @@ const scriptUrl = 'https://script.google.com/macros/s/AKfycbzMb5yE0GnyRqPutKHBob
 const COL = { TIME:0, TEAM:1, HA:2, SCORE:3, OPP:4, STATUS:5, INNING:6, WL:7, PROJVALUE:15 };
 
 // ── Helpers ──────────────────────────────────────────────────
-const fmt = n => n == null ? '—' :
-  Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmt = n => n == null ? '—' : Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
 const fmtSigned = n => (n == null || isNaN(n)) ? '—' : (n > 0 ? '+' : '') + fmt(n);
 const colorClass = n => n > 0 ? 'up' : n < 0 ? 'down' : 'flat';
 
-// ── Single chart instance ────────────────────────────────────
-const liveChartEl  = document.getElementById('chart-container');
-const dailyChartEl = document.getElementById('daily-chart-container');
+// ── Chart instances ──────────────────────────────────────────
+function makeChart(elId, timeVisible) {
+  const el = document.getElementById(elId);
+  const c  = LightweightCharts.createChart(el, {
+    layout:{ background:{color:'#111318'}, textColor:'#6b7280' },
+    grid:{ vertLines:{color:'#1e2128'}, horzLines:{color:'#1e2128'} },
+    crosshair:{ vertLine:{color:'#3a3f4a',labelBackgroundColor:'#1e2128'},
+                horzLine:{color:'#3a3f4a',labelBackgroundColor:'#1e2128'} },
+    rightPriceScale:{ borderColor:'#1e2128' },
+    timeScale:{ borderColor:'#1e2128', timeVisible:!!timeVisible, secondsVisible:false },
+  });
+  new ResizeObserver(() => { const w=el.offsetWidth; if(w>0) c.applyOptions({width:w}); }).observe(el);
+  return { chart:c, el };
+}
 
-const liveChart = LightweightCharts.createChart(liveChartEl, {
-  layout:{ background:{color:'#111318'}, textColor:'#6b7280' },
-  grid:{ vertLines:{color:'#1e2128'}, horzLines:{color:'#1e2128'} },
-  crosshair:{ vertLine:{color:'#3a3f4a',labelBackgroundColor:'#1e2128'},
-              horzLine:{color:'#3a3f4a',labelBackgroundColor:'#1e2128'} },
-  rightPriceScale:{ borderColor:'#1e2128' },
-  timeScale:{ borderColor:'#1e2128', timeVisible:true, secondsVisible:false },
-});
-const seriesCompleted = liveChart.addLineSeries({ color:'#00d97e', lineWidth:2,
-  priceLineVisible:false, lastValueVisible:true, crosshairMarkerVisible:true });
-const seriesLive = liveChart.addLineSeries({ color:'#fbbf24', lineWidth:1.5, lineStyle:1,
-  priceLineVisible:false, lastValueVisible:true, crosshairMarkerVisible:true });
-new ResizeObserver(() => liveChart.applyOptions({ width: liveChartEl.offsetWidth })).observe(liveChartEl);
+// MLB Live
+const mlbLive = makeChart('mlb-live-chart', true);
+const mlbLiveCompleted = mlbLive.chart.addLineSeries({color:'#00d97e',lineWidth:2,priceLineVisible:false,lastValueVisible:true,crosshairMarkerVisible:true});
+const mlbLiveSeries    = mlbLive.chart.addLineSeries({color:'#fbbf24',lineWidth:1.5,lineStyle:1,priceLineVisible:false,lastValueVisible:true,crosshairMarkerVisible:true});
 
-const dailyChart = LightweightCharts.createChart(dailyChartEl, {
-  layout:{ background:{color:'#111318'}, textColor:'#6b7280' },
-  grid:{ vertLines:{color:'#1e2128'}, horzLines:{color:'#1e2128'} },
-  crosshair:{ vertLine:{color:'#3a3f4a',labelBackgroundColor:'#1e2128'},
-              horzLine:{color:'#3a3f4a',labelBackgroundColor:'#1e2128'} },
-  rightPriceScale:{ borderColor:'#1e2128' },
-  timeScale:{ borderColor:'#1e2128', timeVisible:false },
-});
-const dailySeries = dailyChart.addLineSeries({ color:'#3b82f6', lineWidth:2,
-  priceLineVisible:false, lastValueVisible:true, crosshairMarkerVisible:true,
-  crosshairMarkerRadius:5 });
-const dailyCumSeries = dailyChart.addLineSeries({ color:'#00d97e', lineWidth:2,
-  lineStyle:1, priceLineVisible:false, lastValueVisible:true, crosshairMarkerVisible:true,
-  crosshairMarkerRadius:5 });
-const dailyZeroSeries = dailyChart.addLineSeries({ color:'#3a3f4a', lineWidth:1,
-  lineStyle:2, priceLineVisible:false, lastValueVisible:false, crosshairMarkerVisible:false });
-new ResizeObserver(() => {
-  const w = dailyChartEl.offsetWidth;
-  if (w > 0) dailyChart.applyOptions({ width: w });
-}).observe(dailyChartEl);
+// MLB Daily
+const mlbDaily = makeChart('mlb-daily-chart', false);
+const mlbDailySeries = mlbDaily.chart.addLineSeries({color:'#3b82f6',lineWidth:2,priceLineVisible:false,lastValueVisible:true,crosshairMarkerVisible:true,crosshairMarkerRadius:5});
+const mlbDailyZero   = mlbDaily.chart.addLineSeries({color:'#3a3f4a',lineWidth:1,lineStyle:2,priceLineVisible:false,lastValueVisible:false,crosshairMarkerVisible:false});
+
+// NFL Live
+const nflLive = makeChart('nfl-live-chart', true);
+const nflLiveCompleted = nflLive.chart.addLineSeries({color:'#f97316',lineWidth:2,priceLineVisible:false,lastValueVisible:true,crosshairMarkerVisible:true});
+const nflLiveSeries    = nflLive.chart.addLineSeries({color:'#fbbf24',lineWidth:1.5,lineStyle:1,priceLineVisible:false,lastValueVisible:true,crosshairMarkerVisible:true});
+
+// NFL Daily
+const nflDaily = makeChart('nfl-daily-chart', false);
+const nflDailySeries = nflDaily.chart.addLineSeries({color:'#f97316',lineWidth:2,priceLineVisible:false,lastValueVisible:true,crosshairMarkerVisible:true,crosshairMarkerRadius:5});
+const nflDailyZero   = nflDaily.chart.addLineSeries({color:'#3a3f4a',lineWidth:1,lineStyle:2,priceLineVisible:false,lastValueVisible:false,crosshairMarkerVisible:false});
+
+// Combined
+const combinedChartObj = makeChart('combined-chart', false);
+const combinedMLB = combinedChartObj.chart.addLineSeries({color:'#00d97e',lineWidth:2,priceLineVisible:false,lastValueVisible:true,crosshairMarkerVisible:true,crosshairMarkerRadius:5});
+const combinedNFL = combinedChartObj.chart.addLineSeries({color:'#f97316',lineWidth:2,priceLineVisible:false,lastValueVisible:true,crosshairMarkerVisible:true,crosshairMarkerRadius:5});
+const combinedZero = combinedChartObj.chart.addLineSeries({color:'#3a3f4a',lineWidth:1,lineStyle:2,priceLineVisible:false,lastValueVisible:false,crosshairMarkerVisible:false});
 
 // ── Tab switching ────────────────────────────────────────────
-let currentTab = 'live';
+let initializedTabs = new Set(['mlb-live']);
+
 function switchTab(tab) {
-  currentTab = tab;
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelector(`.tab-btn[onclick="switchTab('${tab}')"]`).classList.add('active');
   document.getElementById('page-' + tab).classList.add('active');
- if (tab === 'daily') {
-    setTimeout(() => {
-      const w = dailyChartEl.offsetWidth;
-      dailyChart.applyOptions({ width: w || 691, height: 380 });
-      refreshDaily().then(() => {
-        dailyChart.timeScale().fitContent();
-      });
-    }, 250);
-  }
+
+  setTimeout(() => {
+    const charts = {
+      'mlb-live':  mlbLive,
+      'mlb-daily': mlbDaily,
+      'nfl-live':  nflLive,
+      'nfl-daily': nflDaily,
+      'combined':  combinedChartObj
+    };
+    const c = charts[tab];
+    if (c) { const w = c.el.offsetWidth; if (w > 0) c.chart.applyOptions({width:w}); }
+
+    if (!initializedTabs.has(tab)) {
+      initializedTabs.add(tab);
+      if (tab === 'mlb-daily')  refreshMLBDaily();
+      if (tab === 'nfl-live')   refreshNFLLive();
+      if (tab === 'nfl-daily')  refreshNFLDaily();
+      if (tab === 'combined')   refreshCombined();
+    } else {
+      // Re-fit content on revisit
+      if (tab === 'mlb-daily')  { mlbDaily.chart.timeScale().fitContent(); }
+      if (tab === 'nfl-daily')  { nflDaily.chart.timeScale().fitContent(); }
+      if (tab === 'combined')   { combinedChartObj.chart.timeScale().fitContent(); }
+    }
+  }, 100);
 }
 
-// ── Live ticker ──────────────────────────────────────────────
-function buildGameTicker(games) {
-  const feed = document.getElementById('ticker-feed');
+// ── Game ticker builder (shared) ─────────────────────────────
+function buildGameTicker(feedId, countId, finalsStatId, games, isFinalFn) {
+  const feed   = document.getElementById(feedId);
   const finals = games.filter(g => {
-    const team   = String(g[COL.TEAM]||'').trim();
-    const status = String(g[COL.STATUS]||'').trim().toLowerCase();
-    return team && (status==='final'||status==='game over');
+    const team   = String(g[COL.TEAM] || '').trim();
+    const status = String(g[COL.STATUS] || '').trim();
+    return team && isFinalFn(status);
   });
   const liveCount = games.filter(g =>
-    String(g[COL.STATUS]||'').trim().toLowerCase()!=='final' &&
-    String(g[COL.TEAM]||'').trim()).length;
-  document.getElementById('tick-count').textContent = `${finals.length}F / ${liveCount}L`;
-  document.getElementById('live-finals').textContent = finals.length;
+    !isFinalFn(String(g[COL.STATUS]||'').trim()) && String(g[COL.TEAM]||'').trim()).length;
+
+  if (countId)    document.getElementById(countId).textContent    = `${finals.length}F / ${liveCount}L`;
+  if (finalsStatId) document.getElementById(finalsStatId).textContent = finals.length;
+
   if (!finals.length) { feed.innerHTML='<div class="ticker-empty">No final<br/>games yet</div>'; return; }
+
   finals.sort((a,b) => {
     const pt = t => { const d=new Date('1970/01/01 '+String(t||'').trim()); return isNaN(d.getTime())?0:d.getTime(); };
-    return pt(b[COL.TIME])-pt(a[COL.TIME]);
+    return pt(b[COL.TIME]) - pt(a[COL.TIME]);
   });
+
   feed.innerHTML = finals.map((g,i) => {
     const team=String(g[COL.TEAM]).trim(), ha=String(g[COL.HA]||'').trim();
     const score=g[COL.SCORE], opp=g[COL.OPP], proj=parseFloat(g[COL.PROJVALUE]);
@@ -338,10 +505,10 @@ function buildGameTicker(games) {
   }).join('');
 }
 
-// ── Daily sidebar ────────────────────────────────────────────
-function buildDailySidebar(rows) {
-  const feed = document.getElementById('daily-ticker-feed');
-  document.getElementById('daily-day-count').textContent = rows.length+'d';
+// ── Daily sidebar builder (shared) ───────────────────────────
+function buildDailySidebar(feedId, countId, rows) {
+  const feed = document.getElementById(feedId);
+  document.getElementById(countId).textContent = rows.length + 'd';
   if (!rows.length) { feed.innerHTML='<div class="ticker-empty">No history<br/>yet</div>'; return; }
   feed.innerHTML = [...rows].reverse().map((r,i) => {
     const pc=r.value>0?'pos':r.value<0?'neg':'zero';
@@ -354,61 +521,46 @@ function buildDailySidebar(rows) {
   }).join('');
 }
 
-// ── Daily chart + stats ──────────────────────────────────────
-function buildDailyChart(rows) {
+// ── Daily chart + stats builder (shared) ─────────────────────
+function buildDailyChartUI(series, zeroSeries, chart, rows, ids) {
   if (!rows.length) return;
-  const pts = rows.filter(r=>r.time&&!isNaN(r.time))
-    .map(r=>({ time:r.time, value:r.value }))
-    .sort((a,b)=>a.time-b.time);
+  const pts = rows.filter(r=>r.time&&!isNaN(r.time)).map(r=>({time:r.time,value:r.value})).sort((a,b)=>a.time-b.time);
   if (!pts.length) return;
-  const w = dailyChartEl.offsetWidth;
-  if (w > 0) dailyChart.applyOptions({ width: w, height: 380 });
-  dailySeries.setData(pts);
-  const cumPts = rows.filter(r=>r.time&&!isNaN(r.time))
-    .map(r=>({ time:r.time, value:r.cumulative }))
-    .sort((a,b)=>a.time-b.time);
-  dailyCumSeries.setData(cumPts);
-  dailyZeroSeries.setData(pts.map(p=>({ time:p.time, value:0 })));
-  dailyChart.timeScale().fitContent();
+  series.setData(pts);
+  zeroSeries.setData(pts.map(p=>({time:p.time,value:0})));
+  setTimeout(() => chart.timeScale().fitContent(), 50);
 
-  const vals=rows.map(r=>r.value);
-  const cum=parseFloat(vals.reduce((a,b)=>a+b,0).toFixed(2));
-  const best=Math.max(...vals), worst=Math.min(...vals);
-  const wins=vals.filter(v=>v>0).length;
-  const last=vals.at(-1), prev=vals.length>1?vals.at(-2):null;
-  const chg=prev!==null?parseFloat((last-prev).toFixed(2)):null;
+  const vals=rows.map(r=>r.value), cum=parseFloat(vals.reduce((a,b)=>a+b,0).toFixed(2));
+  const best=Math.max(...vals), worst=Math.min(...vals), wins=vals.filter(v=>v>0).length;
+  const last=vals.at(-1), prev=vals.length>1?vals.at(-2):null, chg=prev!==null?parseFloat((last-prev).toFixed(2)):null;
 
-  document.getElementById('daily-val').textContent=fmtSigned(last);
-  document.getElementById('daily-val').className='big-val '+colorClass(last);
-  document.getElementById('daily-chg').textContent=chg!==null?`DoD: ${fmtSigned(chg)}`:'—';
-  document.getElementById('daily-chg').className='big-chg '+(chg!==null?colorClass(chg):'flat');
-  document.getElementById('daily-cum').textContent=fmtSigned(cum);
-  document.getElementById('daily-cum').className='stat-value '+colorClass(cum);
-  document.getElementById('daily-best').textContent=fmtSigned(best);
-  document.getElementById('daily-worst').textContent=fmtSigned(worst);
-  document.getElementById('daily-wins').textContent=`${wins} / ${vals.length}`;
-  document.getElementById('daily-updated').textContent='Updated: '+new Date().toLocaleTimeString();
+  document.getElementById(ids.val).textContent = fmtSigned(last);
+  document.getElementById(ids.val).className   = 'big-val ' + colorClass(last);
+  document.getElementById(ids.chg).textContent = chg!==null?`DoD: ${fmtSigned(chg)}`:'—';
+  document.getElementById(ids.chg).className   = 'big-chg ' + (chg!==null?colorClass(chg):'flat');
+  document.getElementById(ids.cum).textContent  = fmtSigned(cum);
+  document.getElementById(ids.cum).className    = 'stat-value ' + colorClass(cum);
+  document.getElementById(ids.best).textContent  = fmtSigned(best);
+  document.getElementById(ids.worst).textContent = fmtSigned(worst);
+  document.getElementById(ids.wins).textContent  = `${wins} / ${vals.length}`;
+  document.getElementById(ids.updated).textContent = 'Updated: ' + new Date().toLocaleTimeString();
 }
 
-function buildDailyTable(rows) {
-  const tbody=document.getElementById('daily-table-body');
+function buildDailyTableUI(tbodyId, rows) {
+  const tbody = document.getElementById(tbodyId);
   if (!rows.length) { tbody.innerHTML='<tr><td colspan="4" style="color:var(--sub);text-align:center;">No data yet</td></tr>'; return; }
-  tbody.innerHTML=[...rows].reverse().map(r=>{
+  tbody.innerHTML = [...rows].reverse().map(r => {
     const vc=r.value>0?'td-pos':r.value<0?'td-neg':'td-flat';
     const cc=r.change>0?'td-chg-pos':r.change<0?'td-chg-neg':'td-flat';
     const cumc=r.cumulative>0?'td-chg-pos':r.cumulative<0?'td-chg-neg':'td-flat';
-    return `<tr>
-      <td>${r.date}</td>
-      <td class="${vc}">${fmtSigned(r.value)}</td>
-      <td class="${cc}">${r.change!==null?fmtSigned(r.change):'—'}</td>
-      <td class="${cumc}">${fmtSigned(r.cumulative)}</td>
-    </tr>`;
+    return `<tr><td>${r.date}</td><td class="${vc}">${fmtSigned(r.value)}</td><td class="${cc}">${r.change!==null?fmtSigned(r.change):'—'}</td><td class="${cumc}">${fmtSigned(r.cumulative)}</td></tr>`;
   }).join('');
 }
 
-// ── Fetch ────────────────────────────────────────────────────
-async function fetchLog() {
-  const rows=await (await fetch(scriptUrl)).json();
+// ── Fetch helpers ─────────────────────────────────────────────
+async function fetchLog(param) {
+  const url = param ? scriptUrl + '?sheet=' + param : scriptUrl;
+  const rows = await (await fetch(url)).json();
   if (!Array.isArray(rows)||rows.length<2) return [];
   const seen=new Set(), data=[];
   for (let i=1;i<rows.length;i++) {
@@ -418,106 +570,200 @@ async function fetchLog() {
     const t=Math.floor(ts.getTime()/1000);
     if (seen.has(t)) continue;
     seen.add(t);
-    data.push({ time:t, value:total, completed });
+    data.push({time:t, value:total, completed});
   }
   return data.sort((a,b)=>a.time-b.time);
 }
 
-async function fetchGames() {
-  const rows=await (await fetch(scriptUrl+'?sheet=games')).json();
+async function fetchGames(param) {
+  const rows = await (await fetch(scriptUrl+'?sheet='+param)).json();
   if (!Array.isArray(rows)||rows.length<2) return [];
   return rows.slice(1);
 }
 
-async function fetchDaily() {
-  const rows=await (await fetch(scriptUrl+'?sheet=daily')).json();
+async function fetchDaily(param) {
+  const rows = await (await fetch(scriptUrl+'?sheet='+param)).json();
   if (!Array.isArray(rows)||rows.length<2) return [];
   const data=[]; let cumulative=0;
   for (let i=1;i<rows.length;i++) {
     const raw=String(rows[i][0]||'').trim(), val=parseFloat(rows[i][1]);
     if (!raw||isNaN(val)) continue;
     let dt;
-    if (raw.includes('T')) {
-      dt = new Date(raw);
-    } else if (raw.includes('/')) {
-      const p = raw.split('/');
-      if (p.length < 3) continue;
-      dt = new Date(p[2]+'-'+String(p[0]).padStart(2,'0')+'-'+String(p[1]).padStart(2,'0')+'T12:00:00');
-    } else {
-      continue;
-    }
+    if (raw.includes('T')) { dt=new Date(raw); }
+    else if (raw.includes('/')) {
+      const p=raw.split('/');
+      if (p.length<3) continue;
+      dt=new Date(p[2]+'-'+String(p[0]).padStart(2,'0')+'-'+String(p[1]).padStart(2,'0')+'T12:00:00');
+    } else continue;
     if (isNaN(dt.getTime())) continue;
     const dateStr=`${dt.getMonth()+1}/${dt.getDate()}/${dt.getFullYear()}`;
     cumulative=parseFloat((cumulative+val).toFixed(2));
-    data.push({
-      date:dateStr, time:Math.floor(dt.getTime()/1000), value:val,
-      change:i>1?parseFloat((val-parseFloat(rows[i-1][1])).toFixed(2)):null,
-      cumulative
-    });
+    data.push({date:dateStr, time:Math.floor(dt.getTime()/1000), value:val,
+      change:i>1?parseFloat((val-parseFloat(rows[i-1][1])).toFixed(2)):null, cumulative});
   }
   return data;
 }
 
-// ── Live UI ──────────────────────────────────────────────────
-function updateLiveChart(logData) {
-  if (!logData.length) return;
-  const cp=[], lp=[];
-  for (const d of logData) {
-    lp.push({ time:d.time, value:d.value });
-    if (d.completed!==null&&!isNaN(d.completed)) cp.push({ time:d.time, value:d.completed });
-  }
-  if (!cp.length) cp.push(...logData.map(d=>({ time:d.time, value:d.value })));
-  seriesCompleted.setData(cp.sort((a,b)=>a.time-b.time));
-  seriesLive.setData(lp.sort((a,b)=>a.time-b.time));
-}
-
-function updateLiveUI(logData, games) {
+// ── Live UI builder (shared) ──────────────────────────────────
+function updateLiveUI(logData, ids) {
   if (!logData.length) return;
   const vals=logData.map(d=>d.value), last=vals.at(-1), open=vals[0];
   const high=Math.max(...vals), low=Math.min(...vals), chg=last-open;
   const pct=((chg/Math.abs(open||1))*100).toFixed(2);
   const dir=colorClass(chg), sign=chg>=0?'+':'';
-  document.getElementById('live-val').textContent=fmt(last);
-  document.getElementById('live-val').className='big-val '+dir;
-  document.getElementById('live-chg').textContent=`${sign}${fmt(chg)}  (${sign}${pct}%)`;
-  document.getElementById('live-chg').className='big-chg '+dir;
-  document.getElementById('live-open').textContent=fmt(open);
-  document.getElementById('live-high').textContent=fmt(high);
-  document.getElementById('live-low').textContent=fmt(low);
-  document.getElementById('live-updated').textContent='Last updated: '+new Date().toLocaleTimeString();
-  if (games&&games.length) buildGameTicker(games);
+  document.getElementById(ids.val).textContent  = fmt(last);
+  document.getElementById(ids.val).className    = 'big-val ' + dir;
+  document.getElementById(ids.chg).textContent  = `${sign}${fmt(chg)}  (${sign}${pct}%)`;
+  document.getElementById(ids.chg).className    = 'big-chg ' + dir;
+  document.getElementById(ids.open).textContent = fmt(open);
+  document.getElementById(ids.high).textContent = fmt(high);
+  document.getElementById(ids.low).textContent  = fmt(low);
+  document.getElementById(ids.updated).textContent = 'Last updated: ' + new Date().toLocaleTimeString();
 }
 
-// ── Refresh ──────────────────────────────────────────────────
-async function refresh() {
-  try {
-    const [logData,games]=await Promise.all([fetchLog(),fetchGames()]);
-    updateLiveChart(logData);
-    updateLiveUI(logData,games);
-  } catch(e) {
-    document.getElementById('live-updated').textContent='Fetch failed — retrying…';
-    console.error(e);
+function updateLiveChart(logData, completedSeries, liveSeries) {
+  if (!logData.length) return;
+  const cp=[], lp=[];
+  for (const d of logData) {
+    lp.push({time:d.time, value:d.value});
+    if (d.completed!==null&&!isNaN(d.completed)) cp.push({time:d.time, value:d.completed});
   }
+  if (!cp.length) cp.push(...logData.map(d=>({time:d.time, value:d.value})));
+  completedSeries.setData(cp.sort((a,b)=>a.time-b.time));
+  liveSeries.setData(lp.sort((a,b)=>a.time-b.time));
 }
 
-async function refreshDaily() {
+// ── MLB refresh functions ─────────────────────────────────────
+async function refreshMLBLive() {
   try {
-    const d = await fetchDaily();
-    buildDailyChart(d);
-    buildDailyTable(d);
-    buildDailySidebar(d);
-    setTimeout(() => dailyChart.timeScale().fitContent(), 50);
-  } catch(e) {
-    document.getElementById('daily-updated').textContent='Fetch failed';
-    console.error(e);
-  }
+    const [logData, games] = await Promise.all([fetchLog(null), fetchGames('games')]);
+    updateLiveChart(logData, mlbLiveCompleted, mlbLiveSeries);
+    updateLiveUI(logData, {val:'mlb-live-val',chg:'mlb-live-chg',open:'mlb-stat-open',high:'mlb-stat-high',low:'mlb-stat-low',updated:'mlb-live-updated'});
+    if (games.length) buildGameTicker('mlb-ticker-feed','mlb-tick-count','mlb-stat-finals', games,
+      s => s.toLowerCase()==='final'||s.toLowerCase()==='game over');
+  } catch(e) { document.getElementById('mlb-live-updated').textContent='Fetch failed — retrying…'; console.error(e); }
 }
 
-refresh();
-setInterval(refresh, 5*60*1000);
-setInterval(refreshDaily, 60*60*1000);
+async function refreshMLBDaily() {
+  try {
+    const d = await fetchDaily('daily');
+    buildDailyChartUI(mlbDailySeries, mlbDailyZero, mlbDaily.chart, d, {
+      val:'mlb-daily-val',chg:'mlb-daily-chg',cum:'mlb-daily-cum',
+      best:'mlb-daily-best',worst:'mlb-daily-worst',wins:'mlb-daily-wins',updated:'mlb-daily-updated'
+    });
+    buildDailyTableUI('mlb-daily-table', d);
+    buildDailySidebar('mlb-daily-ticker-feed','mlb-daily-day-count', d);
+  } catch(e) { document.getElementById('mlb-daily-updated').textContent='Fetch failed'; console.error(e); }
+}
+
+// ── NFL refresh functions ─────────────────────────────────────
+async function refreshNFLLive() {
+  try {
+    const [logData, games] = await Promise.all([fetchLog('nfl_log'), fetchGames('nfl_games')]);
+    updateLiveChart(logData, nflLiveCompleted, nflLiveSeries);
+    updateLiveUI(logData, {val:'nfl-live-val',chg:'nfl-live-chg',open:'nfl-stat-open',high:'nfl-stat-high',low:'nfl-stat-low',updated:'nfl-live-updated'});
+    if (games.length) buildGameTicker('nfl-ticker-feed','nfl-tick-count','nfl-stat-finals', games,
+      s => s==='Final'||s==='Final/OT');
+    // Resize chart after data loads
+    setTimeout(() => { const w=nflLive.el.offsetWidth; if(w>0) nflLive.chart.applyOptions({width:w}); }, 150);
+  } catch(e) { document.getElementById('nfl-live-updated').textContent='Fetch failed — retrying…'; console.error(e); }
+}
+
+async function refreshNFLDaily() {
+  try {
+    const d = await fetchDaily('nfl_daily');
+    buildDailyChartUI(nflDailySeries, nflDailyZero, nflDaily.chart, d, {
+      val:'nfl-daily-val',chg:'nfl-daily-chg',cum:'nfl-daily-cum',
+      best:'nfl-daily-best',worst:'nfl-daily-worst',wins:'nfl-daily-wins',updated:'nfl-daily-updated'
+    });
+    buildDailyTableUI('nfl-daily-table', d);
+    buildDailySidebar('nfl-daily-ticker-feed','nfl-daily-day-count', d);
+  } catch(e) { document.getElementById('nfl-daily-updated').textContent='Fetch failed'; console.error(e); }
+}
+
+// ── Combined refresh ──────────────────────────────────────────
+async function refreshCombined() {
+  try {
+    const [mlbData, nflData] = await Promise.all([fetchDaily('daily'), fetchDaily('nfl_daily')]);
+
+    // MLB chart series
+    if (mlbData.length) {
+      const mlbPts = mlbData.filter(r=>r.time).map(r=>({time:r.time, value:r.value})).sort((a,b)=>a.time-b.time);
+      combinedMLB.setData(mlbPts);
+    }
+
+    // NFL chart series
+    if (nflData.length) {
+      const nflPts = nflData.filter(r=>r.time).map(r=>({time:r.time, value:r.value})).sort((a,b)=>a.time-b.time);
+      combinedNFL.setData(nflPts);
+    }
+
+    // Zero baseline spanning both datasets
+    const allPts = [...(mlbData||[]), ...(nflData||[])].filter(r=>r.time).sort((a,b)=>a.time-b.time);
+    if (allPts.length >= 2) {
+      combinedZero.setData([{time:allPts[0].time,value:0},{time:allPts[allPts.length-1].time,value:0}]);
+    }
+
+    setTimeout(() => combinedChartObj.chart.timeScale().fitContent(), 50);
+
+    // Stats
+    const mlbCum = mlbData.length ? mlbData.at(-1).cumulative : 0;
+    const nflCum = nflData.length ? nflData.at(-1).cumulative : 0;
+    const total  = parseFloat((mlbCum + nflCum).toFixed(2));
+
+    document.getElementById('combined-total').textContent = fmtSigned(total);
+    document.getElementById('combined-total').className   = 'big-val ' + colorClass(total);
+    document.getElementById('combined-mlb-val').textContent = fmtSigned(mlbCum);
+    document.getElementById('combined-mlb-val').className   = 'combined-sport-val ' + colorClass(mlbCum);
+    document.getElementById('combined-mlb-sub').textContent = mlbData.length + ' days tracked';
+    document.getElementById('combined-nfl-val').textContent = fmtSigned(nflCum);
+    document.getElementById('combined-nfl-val').className   = 'combined-sport-val ' + colorClass(nflCum);
+    document.getElementById('combined-nfl-sub').textContent = nflData.length + ' days tracked';
+
+    // Combined table — merge by date
+    const dateMap = {};
+    mlbData.forEach(r => { if (!dateMap[r.date]) dateMap[r.date] = {date:r.date,mlb:null,nfl:null}; dateMap[r.date].mlb = r.value; });
+    nflData.forEach(r => { if (!dateMap[r.date]) dateMap[r.date] = {date:r.date,mlb:null,nfl:null}; dateMap[r.date].nfl = r.value; });
+
+    const combinedRows = Object.values(dateMap).sort((a,b) => {
+      const toMs = s => { const p=s.split('/'); return new Date(p[2]+'-'+p[0].padStart(2,'0')+'-'+p[1].padStart(2,'0')).getTime(); };
+      return toMs(b.date) - toMs(a.date);
+    });
+
+    const tbody = document.getElementById('combined-table');
+    if (!combinedRows.length) {
+      tbody.innerHTML='<tr><td colspan="4" style="color:var(--sub);text-align:center;">No data yet</td></tr>';
+    } else {
+      tbody.innerHTML = combinedRows.map(r => {
+        const mlbV = r.mlb !== null ? r.mlb : null;
+        const nflV = r.nfl !== null ? r.nfl : null;
+        const tot  = (mlbV||0) + (nflV||0);
+        const mlbC = mlbV===null?'td-flat':mlbV>0?'td-pos':mlbV<0?'td-neg':'td-flat';
+        const nflC = nflV===null?'td-flat':nflV>0?'td-pos':nflV<0?'td-neg':'td-flat';
+        const totC = tot>0?'td-chg-pos':tot<0?'td-chg-neg':'td-flat';
+        return `<tr>
+          <td>${r.date}</td>
+          <td class="${mlbC}">${mlbV!==null?fmtSigned(mlbV):'—'}</td>
+          <td class="${nflC}">${nflV!==null?fmtSigned(nflV):'—'}</td>
+          <td class="${totC}">${fmtSigned(tot)}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    document.getElementById('combined-updated').textContent = 'Updated: ' + new Date().toLocaleTimeString();
+  } catch(e) { document.getElementById('combined-updated').textContent='Fetch failed'; console.error(e); }
+}
+
+// ── Initial load ──────────────────────────────────────────────
+refreshMLBLive();
+setInterval(refreshMLBLive, 5*60*1000);
+setInterval(() => {
+  if (initializedTabs.has('mlb-daily'))  refreshMLBDaily();
+  if (initializedTabs.has('nfl-live'))   refreshNFLLive();
+  if (initializedTabs.has('nfl-daily'))  refreshNFLDaily();
+  if (initializedTabs.has('combined'))   refreshCombined();
+}, 60*60*1000);
 </script>
 </body>
 </html>
-</body>
-</html>
+
