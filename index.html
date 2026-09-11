@@ -455,7 +455,10 @@ function switchTab(tab) {
     const c = charts[tab];
     if (c) {
       const w = c.el.offsetWidth;
-      if (w > 0) c.chart.applyOptions({width: w});
+      if (w > 0) {
+        c.chart.applyOptions({width: w});
+        requestAnimationFrame(() => c.chart.timeScale().fitContent());
+      }
     }
 
     if (!initializedTabs.has(tab)) {
@@ -466,10 +469,10 @@ function switchTab(tab) {
       if (tab === 'combined')   refreshCombined();
     } else {
       // Re-fit on revisit after width is set
-      if (tab === 'mlb-daily')  { mlbDaily.chart.timeScale().fitContent(); }
-      if (tab === 'nfl-daily')  { nflDaily.chart.timeScale().fitContent(); }
-      if (tab === 'combined')   { combinedChartObj.chart.timeScale().fitContent(); }
-      if (tab === 'nfl-live')   { nflLive.chart.timeScale().fitContent(); }
+      if (tab === 'mlb-daily')  { requestAnimationFrame(() => mlbDaily.chart.timeScale().fitContent()); }
+      if (tab === 'nfl-daily')  { requestAnimationFrame(() => nflDaily.chart.timeScale().fitContent()); }
+      if (tab === 'combined')   { requestAnimationFrame(() => combinedChartObj.chart.timeScale().fitContent()); }
+      if (tab === 'nfl-live')   { requestAnimationFrame(() => nflLive.chart.timeScale().fitContent()); }
     }
   }, 150);
 }
@@ -538,7 +541,7 @@ function buildDailyChartUI(series, zeroSeries, chartObj, rows, ids) {
   zeroSeries.setData(pts.map(p=>({time:p.time,value:0})));
   setTimeout(() => {
     if (el) { const w = el.offsetWidth; if (w > 0) chart.applyOptions({width: w}); }
-    chart.timeScale().fitContent();
+    requestAnimationFrame(() => chart.timeScale().fitContent());
   }, 200);
 
   const vals=rows.map(r=>r.value), cum=parseFloat(vals.reduce((a,b)=>a+b,0).toFixed(2));
@@ -678,7 +681,7 @@ async function refreshNFLLive() {
     setTimeout(() => {
       const w = nflLive.el.offsetWidth;
       if (w > 0) nflLive.chart.applyOptions({width: w});
-      nflLive.chart.timeScale().fitContent();
+      requestAnimationFrame(() => nflLive.chart.timeScale().fitContent());
     }, 200);
   } catch(e) { document.getElementById('nfl-live-updated').textContent='Fetch failed — retrying…'; console.error(e); }
 }
@@ -721,7 +724,7 @@ async function refreshCombined() {
     setTimeout(() => {
       const w = combinedChartObj.el.offsetWidth;
       if (w > 0) combinedChartObj.chart.applyOptions({width: w});
-      combinedChartObj.chart.timeScale().fitContent();
+      requestAnimationFrame(() => combinedChartObj.chart.timeScale().fitContent());
     }, 200);
 
     // Stats
