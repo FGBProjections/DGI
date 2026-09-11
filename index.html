@@ -451,8 +451,12 @@ function switchTab(tab) {
       'nfl-daily': nflDaily,
       'combined':  combinedChartObj
     };
+    // Always force correct width before any data load or fitContent
     const c = charts[tab];
-    if (c) { const w = c.el.offsetWidth; if (w > 0) c.chart.applyOptions({width:w}); }
+    if (c) {
+      const w = c.el.offsetWidth;
+      if (w > 0) c.chart.applyOptions({width: w});
+    }
 
     if (!initializedTabs.has(tab)) {
       initializedTabs.add(tab);
@@ -461,12 +465,13 @@ function switchTab(tab) {
       if (tab === 'nfl-daily')  refreshNFLDaily();
       if (tab === 'combined')   refreshCombined();
     } else {
-      // Re-fit content on revisit
+      // Re-fit on revisit after width is set
       if (tab === 'mlb-daily')  { mlbDaily.chart.timeScale().fitContent(); }
       if (tab === 'nfl-daily')  { nflDaily.chart.timeScale().fitContent(); }
       if (tab === 'combined')   { combinedChartObj.chart.timeScale().fitContent(); }
+      if (tab === 'nfl-live')   { nflLive.chart.timeScale().fitContent(); }
     }
-  }, 100);
+  }, 150);
 }
 
 // ── Game ticker builder (shared) ─────────────────────────────
@@ -522,13 +527,19 @@ function buildDailySidebar(feedId, countId, rows) {
 }
 
 // ── Daily chart + stats builder (shared) ─────────────────────
-function buildDailyChartUI(series, zeroSeries, chart, rows, ids) {
+// chartObj = { chart, el } from makeChart()
+function buildDailyChartUI(series, zeroSeries, chartObj, rows, ids) {
   if (!rows.length) return;
   const pts = rows.filter(r=>r.time&&!isNaN(r.time)).map(r=>({time:r.time,value:r.value})).sort((a,b)=>a.time-b.time);
   if (!pts.length) return;
+  const chart = chartObj.chart || chartObj; // accept both {chart,el} and raw chart
+  const el    = chartObj.el || null;
   series.setData(pts);
   zeroSeries.setData(pts.map(p=>({time:p.time,value:0})));
-  setTimeout(() => chart.timeScale().fitContent(), 50);
+  setTimeout(() => {
+    if (el) { const w = el.offsetWidth; if (w > 0) chart.applyOptions({width: w}); }
+    chart.timeScale().fitContent();
+  }, 200);
 
   const vals=rows.map(r=>r.value), cum=parseFloat(vals.reduce((a,b)=>a+b,0).toFixed(2));
   const best=Math.max(...vals), worst=Math.min(...vals), wins=vals.filter(v=>v>0).length;
@@ -647,7 +658,7 @@ async function refreshMLBLive() {
 async function refreshMLBDaily() {
   try {
     const d = await fetchDaily('daily');
-    buildDailyChartUI(mlbDailySeries, mlbDailyZero, mlbDaily.chart, d, {
+    buildDailyChartUI(mlbDailySeries, mlbDailyZero, mlbDaily, d, {
       val:'mlb-daily-val',chg:'mlb-daily-chg',cum:'mlb-daily-cum',
       best:'mlb-daily-best',worst:'mlb-daily-worst',wins:'mlb-daily-wins',updated:'mlb-daily-updated'
     });
@@ -664,15 +675,18 @@ async function refreshNFLLive() {
     updateLiveUI(logData, {val:'nfl-live-val',chg:'nfl-live-chg',open:'nfl-stat-open',high:'nfl-stat-high',low:'nfl-stat-low',updated:'nfl-live-updated'});
     if (games.length) buildGameTicker('nfl-ticker-feed','nfl-tick-count','nfl-stat-finals', games,
       s => s==='Final'||s==='Final/OT');
-    // Resize chart after data loads
-    setTimeout(() => { const w=nflLive.el.offsetWidth; if(w>0) nflLive.chart.applyOptions({width:w}); }, 150);
+    setTimeout(() => {
+      const w = nflLive.el.offsetWidth;
+      if (w > 0) nflLive.chart.applyOptions({width: w});
+      nflLive.chart.timeScale().fitContent();
+    }, 200);
   } catch(e) { document.getElementById('nfl-live-updated').textContent='Fetch failed — retrying…'; console.error(e); }
 }
 
 async function refreshNFLDaily() {
   try {
     const d = await fetchDaily('nfl_daily');
-    buildDailyChartUI(nflDailySeries, nflDailyZero, nflDaily.chart, d, {
+    buildDailyChartUI(nflDailySeries, nflDailyZero, nflDaily, d, {
       val:'nfl-daily-val',chg:'nfl-daily-chg',cum:'nfl-daily-cum',
       best:'nfl-daily-best',worst:'nfl-daily-worst',wins:'nfl-daily-wins',updated:'nfl-daily-updated'
     });
@@ -704,7 +718,11 @@ async function refreshCombined() {
       combinedZero.setData([{time:allPts[0].time,value:0},{time:allPts[allPts.length-1].time,value:0}]);
     }
 
-    setTimeout(() => combinedChartObj.chart.timeScale().fitContent(), 50);
+    setTimeout(() => {
+      const w = combinedChartObj.el.offsetWidth;
+      if (w > 0) combinedChartObj.chart.applyOptions({width: w});
+      combinedChartObj.chart.timeScale().fitContent();
+    }, 200);
 
     // Stats
     const mlbCum = mlbData.length ? mlbData.at(-1).cumulative : 0;
