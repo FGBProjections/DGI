@@ -397,6 +397,8 @@ const colorClass = n => n > 0 ? 'up' : n < 0 ? 'down' : 'flat';
 function makeChart(elId, timeVisible) {
   const el = document.getElementById(elId);
   const c  = LightweightCharts.createChart(el, {
+    width:  el.offsetWidth || 800,   // use real width if visible, fallback for hidden tabs
+    height: 380,
     layout:{ background:{color:'#111318'}, textColor:'#6b7280' },
     grid:{ vertLines:{color:'#1e2128'}, horzLines:{color:'#1e2128'} },
     crosshair:{ vertLine:{color:'#3a3f4a',labelBackgroundColor:'#1e2128'},
@@ -787,4 +789,3 @@ setInterval(() => {
 </script>
 </body>
 </html>
-
